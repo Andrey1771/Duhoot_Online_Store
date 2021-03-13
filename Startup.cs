@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using OnlineShopDuhootWeb.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineShopDuhootWeb
 {
@@ -23,7 +26,14 @@ namespace OnlineShopDuhootWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // получаем строку подключения из файла конфигурации
+            string connection = Configuration.GetConnectionString("ShopDbConnection");
+            // добавляем контекст UserContext в качестве сервиса в приложение
+            services.AddDbContext<ShopDbContext>(options =>
+                options.UseSqlServer(connection));
+
             services.AddControllersWithViews();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
