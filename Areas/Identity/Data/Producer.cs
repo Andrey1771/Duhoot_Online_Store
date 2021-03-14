@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShopDuhootWeb.Entities
+namespace OnlineShopDuhootWeb.Areas.Identity.Data
 {
     public class Producer
     {

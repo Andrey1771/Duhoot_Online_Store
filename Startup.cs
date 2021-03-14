@@ -9,8 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using OnlineShopDuhootWeb.Context;
+//using OnlineShopDuhootWeb.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
+using OnlineShopDuhootWeb.Data;
 
 namespace OnlineShopDuhootWeb
 {
@@ -29,8 +32,12 @@ namespace OnlineShopDuhootWeb
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("ShopDbConnection");
             // добавляем контекст UserContext в качестве сервиса в приложение
-            services.AddDbContext<ShopDbContext>(options =>
+            services.AddDbContext<OnlineShopDuhootWebContext>(options =>
                 options.UseSqlServer(connection));
+
+            // добавление сервисов Idenity
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)///TODO
+                        .AddEntityFrameworkStores<OnlineShopDuhootWebContext>();
 
             services.AddControllersWithViews();
             

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShopDuhootWeb.Entities
+namespace OnlineShopDuhootWeb.Areas.Identity.Data
 {
     public class UserPaySettings
     {
         public int UserPaySettingsId { get; set; }
-        public User User { get; set; }
+        public /*virtual*/ OnlineShopDuhootWebUser User { get; set; }
 
         public uint NumberCard { get; set; }
         public DateTime ValidDate { get; set; }
