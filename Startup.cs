@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 using OnlineShopDuhootWeb.Data;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace OnlineShopDuhootWeb
 {
@@ -57,7 +59,19 @@ namespace OnlineShopDuhootWeb
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
+            // добавляем поддержку каталога node_modules
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(env.ContentRootPath, "node_modules")
+                ),
+                RequestPath = "/node_modules",
+                EnableDirectoryBrowsing = false
+            });
+
 
             app.UseRouting();
 
@@ -69,6 +83,10 @@ namespace OnlineShopDuhootWeb
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+
+            
         }
     }
 }

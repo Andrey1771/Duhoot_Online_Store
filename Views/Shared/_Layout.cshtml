@@ -1,45 +1,26 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OnlineShopDuhootWeb</title>
+    @await Html.PartialAsync("CssPartial")
+    @await Html.PartialAsync("MetatagsPartial")
     <link rel="link" href="" />
-    <link href="~/css/reset.css" rel="stylesheet" />
-    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />-->
-    <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <div class="mainContainer">
-        <header>
 
-            <div class="content">
-                <img class="headerImg" src="images/logo.svg" alt="logo" />
+        @await Html.PartialAsync("HeaderPartial");
 
-                <a class="buttonLogin" href="/Login/Login">LOGIN</a>
-                <a class="buttonRegistration" href="/Login/Registration">REGISTRATION</a>
-
-            </div>
-            
-
-
-        </header>
         <div class="mainContainer">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
-            <div class="mainContainer">
-                &copy; 2021 - OnlineShopDuhootWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @await RenderSectionAsync("Scripts", required: false)
+        @await Html.PartialAsync("FooterPartial")
+
     </div>
+    @await Html.PartialAsync("ScriptPartial")
 </body>
 
 </html>
