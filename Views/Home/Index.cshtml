@@ -2,7 +2,289 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="what__container">
+    <div class="container">
+        <div class="search__back">
+            <form class="search">
+                <div class="search__what">What are you looking for?</div>
+                <div class="search__comboboxes">
+                    <select>
+                        <!--Вставить данные с сервера-->
+                        <option>Пункт 1</option>
+                        <option>Пункт 2</option>
+                    </select>
+                    <select>
+                        <!--Вставить данные с сервера-->
+                        <option>Пункт 1</option>
+                        <option>Пункт 2</option>
+                    </select>
+                </div>
+                <input class="search__text" type="text" placeholder="Keyword, name, date, ..." size="40">
+                <div>
+                    <!--Отправка формы-->
+                    <input class="search__button" type="submit" name="submit" value="SEARCH">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="tools__container">
+    <div class="container">
+        <div class="filters">
+            <nav>
+                <a href="">RECOMMENDED</a>
+                <a href="">LATEST</a>
+                <a href="">HIGHLIGHTS</a>
+            </nav>
+            <form class="filters__map">
+                <select>
+                    <!--Вставить данные с сервера Повторяет выше-->
+                    <option>Пункт 1</option>
+                    <option>Пункт 2</option>
+                </select>
+                <!--Отправка формы-->
+                <div class="map__button">
+                    <input type="submit" name="submit" value="HIDE MAP"></input>
+                </div>
+                <!--<img src="pointerButton.svg" alt="#">-->
+            </form>
+            <div class="filters__links">
+                <div class="filters__list">
+                    <p>FILTER:</p>
+                    <div id="houseFilter" class="filterLinksBackground"><img src="images/houseWhite.svg" alt="houseWhite.svg" class="filterLinkImg"></div>
+                    <div id="girlFilter" class="filterLinksBackground" onclick="changeColor(#E8F369)"><img src="images/girlWhite.svg" alt="girlWhite.svg" class="filterLinkImg"></div>
+                    <div id="hatFilter" class="filterLinksBackground" onclick="changeColor(#1244A4)"><img src="images/hatWhite.svg" alt="hatWhite.svg" class="filterLinkImg"></div>
+                    <div id="musicFilter" class="filterLinksBackground" onclick="changeColor(#EE614D)"><img src="images/musicWhite.svg" alt="musicWhite.svg" class="filterLinkImg"></div>
+                    <div id="busFilter" class="filterLinksBackground" onclick="changeColor(#6C3A7C)"><img src="images/busWhite.svg" alt="busWhite.svg" class="filterLinkImg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="content-up__endLine">
+</div>
+<div class="content__container">
+    <!--Данные элементы будут храниться на сервере и будут автозаполняемыми, эх, придется в будущем тут пострадать неплохо. Тут одна карточка, которая будет шаблоном-->
+    <div class="container">
+        <div class="cards__container">
+            <a href="" class="card">
+                <div class="card-content">
+                    <div class="greenBackground">
+                        <img class="cardBackground" src="images/footerBack.png" alt="background">
+                        <div id="card_1" class="filterLinksBackground greenBackground">
+                            <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+                        </div>
+                    </div>
+                    <!--Background карточки-->
+                    <div class="card-price">
+                        <div>$2,990</div>
+                    </div>
+                    <div class="card-text">
+                        <p>2 bedroom house for rent in Dubai</p>
+                        <p>VISION AGENCY</p>
+                        <div class="card-text-stars">
+                            <img src="images/star.svg">
+                            <!--Надо будет создать аналог прогресс бара, который будет создаваться на C# в html-->
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/emptyStar.svg">
+                            <p>(365)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="" class="card">
+                <div class="card-content">
+                    <div class="greenBackground">
+                        <img class="cardBackground" src="images/footerBack.png" alt="background">
+                        <div id="card_1" class="filterLinksBackground greenBackground">
+                            <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+                        </div>
+                    </div>
+                    <!--Background карточки-->
+                    <div class="card-price">
+                        <div>$2,990</div>
+                    </div>
+                    <div class="card-text">
+                        <p>2 bedroom house for rent in Dubai</p>
+                        <p>VISION AGENCY</p>
+                        <div class="card-text-stars">
+                            <img src="images/star.svg">
+                            <!--Надо будет создать аналог прогресс бара, который будет создаваться на C# в html-->
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/emptyStar.svg">
+                            <p>(365)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="" class="card">
+                <div class="card-content">
+                    <div class="greenBackground">
+                        <img class="cardBackground" src="images/footerBack.png" alt="background">
+                        <div id="card_1" class="filterLinksBackground greenBackground">
+                            <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+                        </div>
+                    </div>
+                    <!--Background карточки-->
+                    <div class="card-price">
+                        <div>$2,990</div>
+                    </div>
+                    <div class="card-text">
+                        <p>2 bedroom house for rent in Dubai</p>
+                        <p>VISION AGENCY</p>
+                        <div class="card-text-stars">
+                            <img src="images/star.svg">
+                            <!--Надо будет создать аналог прогресс бара, который будет создаваться на C# в html-->
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/emptyStar.svg">
+                            <p>(365)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="" class="card">
+                <div class="card-content">
+                    <div class="greenBackground">
+                        <img class="cardBackground" src="images/footerBack.png" alt="background">
+                        <div id="card_1" class="filterLinksBackground greenBackground">
+                            <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+                        </div>
+                    </div>
+                    <!--Background карточки-->
+                    <div class="card-price">
+                        <div>$2,990</div>
+                    </div>
+                    <div class="card-text">
+                        <p>2 bedroom house for rent in Dubai</p>
+                        <p>VISION AGENCY</p>
+                        <div class="card-text-stars">
+                            <img src="images/star.svg">
+                            <!--Надо будет создать аналог прогресс бара, который будет создаваться на C# в html-->
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/emptyStar.svg">
+                            <p>(365)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="" class="card">
+                <div class="card-content">
+                    <div class="greenBackground">
+                        <img class="cardBackground" src="images/footerBack.png" alt="background">
+                        <div id="card_1" class="filterLinksBackground greenBackground">
+                            <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+                        </div>
+                    </div>
+                    <!--Background карточки-->
+                    <div class="card-price">
+                        <div>$2,990</div>
+                    </div>
+                    <div class="card-text">
+                        <p>2 bedroom house for rent in Dubai</p>
+                        <p>VISION AGENCY</p>
+                        <div class="card-text-stars">
+                            <img src="images/star.svg">
+                            <!--Надо будет создать аналог прогресс бара, который будет создаваться на C# в html-->
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/star.svg">
+                            <img src="images/emptyStar.svg">
+                            <p>(365)</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="showMoreCards" onclick="">
+            <!--Показать карточки будет ли он, зависит от сервера-->
+            <p>Load more</p>
+            <p>&#8594;</p>
+        </div>
+    </div>
+</div>
+<div class="whatCan__container">
+    <div class="container">
+        <hr class="content-up__endLine">
+        <div class="whatCan">
+            <div class="whatCan__text">
+                <div>What can DuHoot offer to you?</div>
+                <div>Etiam cursus ipsum quis enim faucibus</div>
+            </div>
+        </div>
+        <div class="whatCanIcons">
+            <!-- <div class="filterLinksBackground greenBackground">
+                <img src="images/houseWhite.svg" alt="house.svg" class="filterLinkImg">
+            </div> -->
+            <!--
+            <div id="container">
+            <div id="dummy"></div>
+                <div id="element">
+                    some text
+                </div>
+            </div>
+            -->
+            <div class="whatCanIcon__container">
+                <div class="dummy"></div>
+                <div class="whatCanIconsBackground whatCanElement">
+                    <img src="images/house.svg" alt="house.svg" class="filterLinkImg whatCanLinkImg">
+                </div>
+            </div>
+            <hr>
+            <div class="whatCanIcon__container">
+                <div class="dummy"></div>
+                <div class="whatCanIconsBackground whatCanElement">
+                    <img src="images/girl.svg" alt="girl.svg" class="filterLinkImg whatCanLinkImg">
+                </div>
+            </div>
+            <hr>
+            <div class="whatCanIcon__container">
+                <div class="dummy"></div>
+                <div class="whatCanIconsBackground whatCanElement">
+                    <img src="images/hat.svg" alt="hat.svg" class="filterLinkImg whatCanLinkImg">
+                </div>
+            </div>
+            <hr>
+            <div class="whatCanIcon__container">
+                <div class="dummy"></div>
+                <div class="whatCanIconsBackground whatCanElement">
+                    <img src="images/music.svg" alt="music.svg" class="filterLinkImg whatCanLinkImg">
+                </div>
+            </div>
+            <hr>
+            <div class="whatCanIcon__container">
+                <div class="dummy"></div>
+                <div class="whatCanIconsBackground whatCanElement">
+                    <img src="images/bus.svg" alt="bus.svg" class="filterLinkImg whatCanLinkImg">
+                </div>
+            </div>
+        </div>
+        <div class="realityText">Reality</div>
+        <div class="whatCan__textAdvantages">
+            <div>
+                <div class="whatCanLinksBackground">
+                    <img src="images/flash.svg" alt="flash.svg" class="filterLinkImg2">
+                </div>
+                <div>
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi gravida tellus in purus pharetra, vel dignissim mauris viverra. Maecenas vitae risus est. In hendrerit, massa at.
+                    <!--Текст заполнитель, xd-->
+                </div>
+            </div>
+            <div>
+                <div class="whatCanLinksBackground">
+                    <img src="images/leaf.svg" alt="leaf.svg" class="filterLinkImg2">
+                </div>
+                <div>
+                    <!--Текст заполнитель, xd-->
+                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi gravida tellus in purus pharetra, vel dignissim mauris viverra. Maecenas vitae risus est. In hendrerit, massa at.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using OnlineShopDuhootWeb.Data;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using OnlineShopDuhootWeb.Service;
 
 namespace OnlineShopDuhootWeb
 {
@@ -24,6 +25,8 @@ namespace OnlineShopDuhootWeb
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Configuration.Bind("Project", new Config());///Проверить
+
         }
 
         public IConfiguration Configuration { get; }
