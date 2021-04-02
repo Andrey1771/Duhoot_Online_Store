@@ -1,3 +1,19 @@
 ﻿<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] - @Config.CompanyName</title>
+@if (ViewData["title"] != null)
+{
+    <title>@ViewData["Title"] - @Config.CompanyName</title>
+}
+else
+{
+    <title>Page - @Config.CompanyName</title>
+
+}
+@if (ViewData["Description"] != null)
+{
+    <meta name="description" content="@ViewData["Description"]" />
+}
+@if (ViewData["Keywords"] != null)
+{
+    <meta name="keywords" content="@ViewData["Keywords"]" />
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "outputFileName": "wwwroot/scripts/javascript/scripts.js",
+    "inputFiles": [
+      "wwwroot/scripts/javascript/burger.js",
+      "wwwroot/scripts/javascript/popups.js",
+      "wwwroot/scripts/javascript/combobox.js"
+    ]
+  }
+]

@@ -9,6 +9,7 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 {
     public class UserPaySettings
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserPaySettingsId { get; set; }
         public /*virtual*/ OnlineShopDuhootWebUser User { get; set; }
 
