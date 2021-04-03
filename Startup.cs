@@ -17,6 +17,11 @@ using OnlineShopDuhootWeb.Data;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using OnlineShopDuhootWeb.Service;
+using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
+using OnlineShopDuhootWeb.Areas.Repositories.EntityFramework;
+using OnlineShopDuhootWeb.Areas.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace OnlineShopDuhootWeb
 {
@@ -34,6 +39,10 @@ namespace OnlineShopDuhootWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //AddTransient, тк объекты легковесные
+            services.AddTransient<IProductSiteCardRepository, EFProductSiteCard>();
+            services.AddTransient<DataManager>();
+            
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("ShopDbConnection");
             // добавляем контекст UserContext в качестве сервиса в приложение
@@ -41,8 +50,29 @@ namespace OnlineShopDuhootWeb
                 options.UseSqlServer(connection));
 
             // добавление сервисов Idenity
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)///TODO
-                        .AddEntityFrameworkStores<OnlineShopDuhootWebContext>();
+           /* services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)///TODO
+                        .AddEntityFrameworkStores<OnlineShopDuhootWebContext>();*/
+
+            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            {
+                opts.User.RequireUniqueEmail = true;
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+
+            }).AddEntityFrameworkStores<OnlineShopDuhootWebContext>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "CompanyAuth";//Разобраться получше
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/account/login";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.SlidingExpiration = true;
+            });
+
 
             services.AddControllersWithViews();
             
@@ -78,6 +108,8 @@ namespace OnlineShopDuhootWeb
 
             app.UseRouting();
 
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

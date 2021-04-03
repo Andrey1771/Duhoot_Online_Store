@@ -47,8 +47,9 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 
         public DateTime DateTimeAdded { get; set; }
 
-
-        Product Product { get; set; }
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
+        public int ProductId { get; set; }
 
     }
 }

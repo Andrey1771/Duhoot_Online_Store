@@ -10,8 +10,8 @@ using OnlineShopDuhootWeb.Data;
 namespace OnlineShopDuhootWeb.Migrations
 {
     [DbContext(typeof(OnlineShopDuhootWebContext))]
-    [Migration("20210314154106_migration_1")]
-    partial class migration_1
+    [Migration("20210403165613_init_migration")]
+    partial class init_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,15 @@ namespace OnlineShopDuhootWeb.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "58704fbc-843e-47bc-971a-1e28bccf6501",
+                            ConcurrencyStamp = "b3ac15cf-c756-40ca-8888-32a1fe1ee503",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -99,12 +108,10 @@ namespace OnlineShopDuhootWeb.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -133,6 +140,13 @@ namespace OnlineShopDuhootWeb.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3cc5e7b1-5d92-4e56-8149-1d895abf236c",
+                            RoleId = "58704fbc-843e-47bc-971a-1e28bccf6501"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -141,12 +155,10 @@ namespace OnlineShopDuhootWeb.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -240,6 +252,26 @@ namespace OnlineShopDuhootWeb.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3cc5e7b1-5d92-4e56-8149-1d895abf236c",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "24a822f8-d892-4c2b-9c28-3e18e0ac417d",
+                            DateBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "my@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MY@EMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHiNxybI/peE37Oj/qAEWo6oIdBDOSNnYdr4mCe/OiL1YuURvkQx2iJkaA5DgkhNFA==",
+                            PhoneNumberConfirmed = false,
+                            Postcode = 0,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Order", b =>
@@ -287,6 +319,16 @@ namespace OnlineShopDuhootWeb.Migrations
                     b.HasKey("ProducerId");
 
                     b.ToTable("Producers");
+
+                    b.HasData(
+                        new
+                        {
+                            ProducerId = 1,
+                            ContactInformation = "Test_ContactInformation_1",
+                            Description = "Test_Description_1",
+                            Location = "Test_Location_1",
+                            Name = "Test_Name_1_Producer"
+                        });
                 });
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Product", b =>
@@ -302,14 +344,79 @@ namespace OnlineShopDuhootWeb.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProducersProducerId")
+                    b.Property<int>("ProducerId")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("ProducersProducerId");
+                    b.HasIndex("ProducerId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Description = "Test_Product_Description",
+                            Name = "Test_Product",
+                            ProducerId = 1
+                        });
+                });
+
+            modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.ProductSiteCard", b =>
+                {
+                    b.Property<int>("ProductCardId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BackgroundImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CountComments")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateTimeAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RightTopText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeCard")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductCardId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductSiteCards");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductCardId = 1,
+                            BackgroundImage = "images/footerBack.png",
+                            CountComments = 3255,
+                            DateTimeAdded = new DateTime(2021, 4, 3, 19, 56, 12, 877, DateTimeKind.Local).AddTicks(9471),
+                            ProductId = 1,
+                            Rating = 3,
+                            RightTopText = "Test_RightTopText",
+                            Text = "Test_Text_Product",
+                            Title = "Test_Title_Product",
+                            TypeCard = 2
+                        });
                 });
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.UserPaySettings", b =>
@@ -415,11 +522,24 @@ namespace OnlineShopDuhootWeb.Migrations
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Product", b =>
                 {
-                    b.HasOne("OnlineShopDuhootWeb.Areas.Identity.Data.Producer", "Producers")
+                    b.HasOne("OnlineShopDuhootWeb.Areas.Identity.Data.Producer", "Producer")
                         .WithMany("Products")
-                        .HasForeignKey("ProducersProducerId");
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Producers");
+                    b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.ProductSiteCard", b =>
+                {
+                    b.HasOne("OnlineShopDuhootWeb.Areas.Identity.Data.Product", "Product")
+                        .WithMany("SiteCards")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.UserPaySettings", b =>
@@ -456,6 +576,11 @@ namespace OnlineShopDuhootWeb.Migrations
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Producer", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Product", b =>
+                {
+                    b.Navigation("SiteCards");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineShopDuhootWeb.Migrations
 {
-    public partial class migration_1 : Migration
+    public partial class init_migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,8 +115,8 @@ namespace OnlineShopDuhootWeb.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -160,8 +160,8 @@ namespace OnlineShopDuhootWeb.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -224,7 +224,7 @@ namespace OnlineShopDuhootWeb.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProducersProducerId = table.Column<int>(type: "int", nullable: true),
+                    ProducerId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -232,11 +232,11 @@ namespace OnlineShopDuhootWeb.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Products_Producers_ProducersProducerId",
-                        column: x => x.ProducersProducerId,
+                        name: "FK_Products_Producers_ProducerId",
+                        column: x => x.ProducerId,
                         principalTable: "Producers",
                         principalColumn: "ProducerId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -262,6 +262,63 @@ namespace OnlineShopDuhootWeb.Migrations
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "ProductSiteCards",
+                columns: table => new
+                {
+                    ProductCardId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BackgroundImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RightTopText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    CountComments = table.Column<int>(type: "int", nullable: false),
+                    TypeCard = table.Column<int>(type: "int", nullable: false),
+                    DateTimeAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductSiteCards", x => x.ProductCardId);
+                    table.ForeignKey(
+                        name: "FK_ProductSiteCards_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "58704fbc-843e-47bc-971a-1e28bccf6501", "b3ac15cf-c756-40ca-8888-32a1fe1ee503", "admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Country", "DateBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Postcode", "SecondName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3cc5e7b1-5d92-4e56-8149-1d895abf236c", 0, null, "24a822f8-d892-4c2b-9c28-3e18e0ac417d", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "my@email.com", true, null, null, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEHiNxybI/peE37Oj/qAEWo6oIdBDOSNnYdr4mCe/OiL1YuURvkQx2iJkaA5DgkhNFA==", null, false, 0, null, "", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "Producers",
+                columns: new[] { "ProducerId", "ContactInformation", "Description", "Location", "Name" },
+                values: new object[] { 1, "Test_ContactInformation_1", "Test_Description_1", "Test_Location_1", "Test_Name_1_Producer" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "58704fbc-843e-47bc-971a-1e28bccf6501", "3cc5e7b1-5d92-4e56-8149-1d895abf236c" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Description", "Name", "ProducerId" },
+                values: new object[] { 1, "Test_Product_Description", "Test_Product", 1 });
+
+            migrationBuilder.InsertData(
+                table: "ProductSiteCards",
+                columns: new[] { "ProductCardId", "BackgroundImage", "CountComments", "DateTimeAdded", "ProductId", "Rating", "RightTopText", "Text", "Title", "TypeCard" },
+                values: new object[] { 1, "images/footerBack.png", 3255, new DateTime(2021, 4, 3, 19, 56, 12, 877, DateTimeKind.Local).AddTicks(9471), 1, 3, "Test_RightTopText", "Test_Text_Product", "Test_Title_Product", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -313,9 +370,14 @@ namespace OnlineShopDuhootWeb.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProducersProducerId",
+                name: "IX_Products_ProducerId",
                 table: "Products",
-                column: "ProducersProducerId");
+                column: "ProducerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductSiteCards_ProductId",
+                table: "ProductSiteCards",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserPaySettings_UserId",
@@ -342,6 +404,9 @@ namespace OnlineShopDuhootWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderProduct");
+
+            migrationBuilder.DropTable(
+                name: "ProductSiteCards");
 
             migrationBuilder.DropTable(
                 name: "UserPaySettings");
