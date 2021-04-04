@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\**" />
+    <Content Remove="Areas\Identity\Pages\**" />
+    <EmbeddedResource Remove="Areas\Identity\Pages\**" />
+    <None Remove="Areas\Identity\Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
   </ItemGroup>
 

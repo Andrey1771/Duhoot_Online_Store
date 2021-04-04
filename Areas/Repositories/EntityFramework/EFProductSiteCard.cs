@@ -22,7 +22,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
         public void DeleteSiteCard(int id)
         {
             dbContext.Remove(new ProductSiteCard() { ProductCardId = id });
-            dbContext.SaveChangesAsync();//Может не работать правильно
+            dbContext.SaveChanges();//Может не работать правильно async
         }
 
         public ProductSiteCard GetSiteCardById(int id)
@@ -40,7 +40,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
             {
                 dbContext.Entry(entity).State = EntityState.Modified;
             }
-            dbContext.SaveChangesAsync();//Может не работать правильно
+            dbContext.SaveChanges();//Может не работать правильно async
         }
     }
 }

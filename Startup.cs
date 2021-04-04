@@ -53,7 +53,7 @@ namespace OnlineShopDuhootWeb
            /* services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)///TODO
                         .AddEntityFrameworkStores<OnlineShopDuhootWebContext>();*/
 
-            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            services.AddIdentity<OnlineShopDuhootWebUser, IdentityRole>(opts =>
             {
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
@@ -66,7 +66,7 @@ namespace OnlineShopDuhootWeb
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = "CompanyAuth";//Разобраться получше
+                options.Cookie.Name = "duhoot";//Разобраться получше
                 options.Cookie.HttpOnly = true;
                 options.LoginPath = "/account/login";
                 options.AccessDeniedPath = "/account/accessdenied";
@@ -74,7 +74,17 @@ namespace OnlineShopDuhootWeb
             });
 
 
-            services.AddControllersWithViews();
+            services.AddAuthorization(x =>
+            {
+                x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
+            });
+
+
+            services.AddControllersWithViews(x =>
+            {
+                x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+            });
+
             
         }
 
@@ -114,6 +124,11 @@ namespace OnlineShopDuhootWeb
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "admin",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

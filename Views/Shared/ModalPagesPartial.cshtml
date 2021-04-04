@@ -1,4 +1,6 @@
-﻿<div id="popup__login" class="popup__login">
+﻿@model LoginViewModel
+
+<div id="popup__login" class="popup__login">
     <div class="popup__login__body">
         <div class="popup__login__content">
             <a href="#header" class="popup__login__close close-popup__login">X</a>
@@ -11,3 +13,11 @@
         </div>
     </div>
 </div>
+
+@if (Model == null)
+{
+    @:<script type="text/javascript">
+    @:function openLoggin()
+    @:$("#popup__login").click();
+    @:</script>
+}
