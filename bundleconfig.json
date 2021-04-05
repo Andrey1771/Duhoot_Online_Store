@@ -4,7 +4,11 @@
     "inputFiles": [
       "wwwroot/scripts/javascript/burger.js",
       "wwwroot/scripts/javascript/popups.js",
-      "wwwroot/scripts/javascript/combobox.js"
+      "wwwroot/scripts/javascript/combobox.js",
+      "wwwroot/scripts/javascript/filters.js",
+      "wwwroot/scripts/javascript/script.js"
+
+
     ]
   }
 ]

@@ -8,11 +8,11 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 {
     public class DataManager
     {
-        public IProductSiteCardRepository ProductSiteCard { get; set; }
+        public IProductSiteCardRepository ProductSiteCardRep { get; set; }
 
         public DataManager(IProductSiteCardRepository productSiteCardRepository)
         {
-            ProductSiteCard = productSiteCardRepository;
+            ProductSiteCardRep = productSiteCardRepository;
         }
     }
 }

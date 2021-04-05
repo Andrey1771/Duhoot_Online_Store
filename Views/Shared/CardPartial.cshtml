@@ -1,0 +1,114 @@
+﻿@model ProductSiteCard
+@{
+    string typeCard = "";
+    string bgCard = "";
+    string imgProperties = "";
+    if (Model != null)
+        switch (Model.TypeCard)
+        {
+            case TypeCard.House:
+                bgCard = "green__bg";
+                typeCard = "green__card";
+                imgProperties = "src=\"images/houseWhite.svg\" alt=\"house.svg\"";
+                break;
+            case TypeCard.Human:
+                bgCard = "red__bg";
+                typeCard = "red__card";
+                imgProperties = "src=\"images/girlWhite.svg\" alt=\"girl.svg\"";
+                break;
+            case TypeCard.Education:
+                bgCard = "blue__bg";
+                typeCard = "blue__card";
+                imgProperties = "src=\"images/hatWhite.svg\" alt=\"hat.svg\"";
+                break;
+            case TypeCard.Music:
+                bgCard = "orange__bg";
+                typeCard = "orange__card";
+                imgProperties = "src=\"images/musicWhite.svg\" alt=\"music.svg\"";
+                break;
+            case TypeCard.Transport:
+                bgCard = "purple__bg";
+                typeCard = "purple__card";
+                imgProperties = "src=\"images/busWhite.svg\" alt=\"bus.svg\"";
+                break;
+            default:
+                break;
+        }
+}
+<a href="" class="card @typeCard active">
+    <div class="card-content">
+
+        <div class="card__image">
+            <img class="card__bg" src="@Model.BackgroundImage" alt="backgroundCard">
+            <div class="card__price @bgCard">
+                @Model.RightTopText
+            </div>
+            <div class="card__icon @bgCard">
+                <img @imgProperties class="filter__icon">
+            </div>
+
+
+        </div>
+
+
+        <div class="card-text">
+            <h2>@Model.Title</h2>
+            <p>@Model.Text</p>
+
+            <div class="card-text-stars">
+                @for (int i = 0; i < Model.Rating; ++i)
+                {
+                    <img src="images/star.svg">
+                }
+                @for (int i = 0; Model.Rating + i < 5; ++i)
+                {
+                    <img src="images/emptyStar.svg">
+                }
+                <p>@Model.CountComments</p>
+            </div>
+        </div>
+    </div>
+</a>
+
+@*
+    public enum TypeCard
+            {
+                House, Human, Education, Music, Transport
+            }
+
+            public class ProductSiteCard
+            {
+                [Required]
+                [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+                public int ProductCardId { get; set; }
+
+                [Display(Name = "Название продукта")]
+                public virtual string Title { get; set; } Ok
+
+                [Display(Name = "Текст под продуктом")]
+                public virtual string Text { get; set; } Ok
+
+                [Display(Name = "Картинка на фоне")]
+                public virtual string BackgroundImage { get; set; } Ok
+
+                [Display(Name = "Дополнительный текст в овале")]
+                public virtual string RightTopText { get; set; } Ok
+
+                [Display(Name = "Рейтинг продукта")]
+                public virtual int Rating { get; set; } Ok // TODO Необходимо реализовать расчет этих параметров в зависимости от Оценок пользавтелей
+
+                [Display(Name = "Количество комментариев")]
+                public virtual int CountComments { get; set; } Ok//
+
+                [Display(Name = "Тип карты продукта")]
+                public virtual TypeCard TypeCard { get; set; }
+
+
+                public DateTime DateTimeAdded { get; set; }
+
+                [ForeignKey("ProductId")]
+                public Product Product { get; set; }
+                public int ProductId { get; set; }
+
+            }
+*@
