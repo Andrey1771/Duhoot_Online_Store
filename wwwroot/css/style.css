@@ -1475,3 +1475,26 @@ input.subscribe__text::placeholder {
 
 
 
+/*////////////////////Admin Partial//////////////////////////*/
+
+.admin__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 800px;
+}
+
+
+.changeCard__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #DD5115
+}
+
+.changeCard__content{
+
+}

@@ -21,18 +21,18 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void DeleteSiteCard(int id)
         {
-            dbContext.Remove(new ProductSiteCard() { ProductCardId = id });
+            dbContext.Remove(new ProductSiteCard() { ProductId = id });
             dbContext.SaveChanges();//Может не работать правильно async
         }
 
         public ProductSiteCard GetSiteCardById(int id)
         {
-            return dbContext.ProductSiteCards.FirstOrDefault(x => x.ProductCardId == id);
+            return dbContext.ProductSiteCards.FirstOrDefault(x => x.ProductId == id);
         }
 
         public void SaveSiteCard(ProductSiteCard entity)
         {
-            if(entity.ProductCardId == default)
+            if(entity.ProductId == default)
             {
                 dbContext.Entry(entity).State = EntityState.Added;
             }

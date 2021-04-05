@@ -267,8 +267,7 @@ namespace OnlineShopDuhootWeb.Migrations
                 name: "ProductSiteCards",
                 columns: table => new
                 {
-                    ProductCardId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BackgroundImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -276,12 +275,11 @@ namespace OnlineShopDuhootWeb.Migrations
                     Rating = table.Column<int>(type: "int", nullable: false),
                     CountComments = table.Column<int>(type: "int", nullable: false),
                     TypeCard = table.Column<int>(type: "int", nullable: false),
-                    DateTimeAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    DateTimeAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductSiteCards", x => x.ProductCardId);
+                    table.PrimaryKey("PK_ProductSiteCards", x => x.ProductId);
                     table.ForeignKey(
                         name: "FK_ProductSiteCards_Products_ProductId",
                         column: x => x.ProductId,
@@ -293,17 +291,25 @@ namespace OnlineShopDuhootWeb.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "58704fbc-843e-47bc-971a-1e28bccf6501", "b3ac15cf-c756-40ca-8888-32a1fe1ee503", "admin", "ADMIN" });
+                values: new object[] { "58704fbc-843e-47bc-971a-1e28bccf6501", "30ee76a1-a93a-44e8-b30e-ebdc32aa3df4", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Country", "DateBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Postcode", "SecondName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3cc5e7b1-5d92-4e56-8149-1d895abf236c", 0, null, "24a822f8-d892-4c2b-9c28-3e18e0ac417d", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "my@email.com", true, null, null, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEHiNxybI/peE37Oj/qAEWo6oIdBDOSNnYdr4mCe/OiL1YuURvkQx2iJkaA5DgkhNFA==", null, false, 0, null, "", false, "admin" });
+                values: new object[] { "3cc5e7b1-5d92-4e56-8149-1d895abf236c", 0, null, "06a4182e-7d8e-42b8-81a9-014cdebac373", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "my@email.com", true, null, null, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEIuxh7Ikuc8tqrg9aElX+cKY9drnDkf7EmNQUcsW8z8cEyls6z9xgUKfW99DuJ7VsQ==", null, false, 0, null, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Producers",
                 columns: new[] { "ProducerId", "ContactInformation", "Description", "Location", "Name" },
-                values: new object[] { 1, "Test_ContactInformation_1", "Test_Description_1", "Test_Location_1", "Test_Name_1_Producer" });
+                values: new object[,]
+                {
+                    { 1, "Test_ContactInformation_1", "Test_Description_1", "Test_Location_1", "Test_Name_1_Producer" },
+                    { 2, "Test_ContactInformation_2", "Test_Description_2", "Test_Location_2", "Test_Name_2_Producer" },
+                    { 3, "Test_ContactInformation_3", "Test_Description_3", "Test_Location_3", "Test_Name_3_Producer" },
+                    { 4, "Test_ContactInformation_4", "Test_Description_4", "Test_Location_4", "Test_Name_4_Producer" },
+                    { 5, "Test_ContactInformation_5", "Test_Description_5", "Test_Location_5", "Test_Name_5_Producer" },
+                    { 6, "Test_ContactInformation_6", "Test_Description_6", "Test_Location_6", "Test_Name_6_Producer" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -313,12 +319,27 @@ namespace OnlineShopDuhootWeb.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "Description", "Name", "ProducerId" },
-                values: new object[] { 1, "Test_Product_Description", "Test_Product", 1 });
+                values: new object[,]
+                {
+                    { 1, "Test_Product_Description", "Test_Product", 1 },
+                    { 2, "Test_Product_Description_2", "Test_Product_2", 1 },
+                    { 3, "Test_Product_Description_3", "Test_Product_3", 2 },
+                    { 4, "Test_Product_Description_4", "Test_Product_4", 3 },
+                    { 5, "Test_Product_Description_5", "Test_Product_5", 4 },
+                    { 6, "Test_Product_Description_6", "Test_Product_6", 5 }
+                });
 
             migrationBuilder.InsertData(
                 table: "ProductSiteCards",
-                columns: new[] { "ProductCardId", "BackgroundImage", "CountComments", "DateTimeAdded", "ProductId", "Rating", "RightTopText", "Text", "Title", "TypeCard" },
-                values: new object[] { 1, "images/footerBack.png", 3255, new DateTime(2021, 4, 3, 19, 56, 12, 877, DateTimeKind.Local).AddTicks(9471), 1, 3, "Test_RightTopText", "Test_Text_Product", "Test_Title_Product", 2 });
+                columns: new[] { "ProductId", "BackgroundImage", "CountComments", "DateTimeAdded", "Rating", "RightTopText", "Text", "Title", "TypeCard" },
+                values: new object[,]
+                {
+                    { 1, "images/footerBack.jpg", 365, new DateTime(2021, 4, 5, 23, 10, 12, 896, DateTimeKind.Local).AddTicks(5291), 4, "$2,990", "2 bedroom house for rent in Dubai", "VISION AGENCY", 0 },
+                    { 2, "images/footerBack.jpg", 1109, new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6311), 5, "$3,100,000", "3 bedroom apartment in Moscow", "Moscow Hostel", 1 },
+                    { 3, "images/footerBack.jpg", 627, new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6329), 4, "$5,990", "High quality education and student life", "MIET", 2 },
+                    { 4, "images/footerBack.jpg", 550, new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6332), 5, "$99", "Hookah bar and modern music club", "Euphoria", 3 },
+                    { 5, "images/footerBack.jpg", 365, new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6334), 4, "$190", "Bus transportation between major cities", "TravelSuit", 4 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -373,11 +394,6 @@ namespace OnlineShopDuhootWeb.Migrations
                 name: "IX_Products_ProducerId",
                 table: "Products",
                 column: "ProducerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSiteCards_ProductId",
-                table: "ProductSiteCards",
-                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserPaySettings_UserId",

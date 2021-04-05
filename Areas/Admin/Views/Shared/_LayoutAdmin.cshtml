@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @await Html.PartialAsync("CssPartial")
+    @await Html.PartialAsync("MetatagsPartial")
+
+</head>
+<body>
+    <div class="background__menu__links">
+
+    </div>
+    <div class="external__container">
+
+        @await Html.PartialAsync("HeaderPartial")
+
+        <div class="mainContainer">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+    </div>
+    @await Html.PartialAsync("ModalPagesPartial")
+    @await Html.PartialAsync("ScriptPartial")
+</body>
+
+</html>

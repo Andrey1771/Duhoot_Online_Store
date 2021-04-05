@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,17 @@ namespace OnlineShopDuhootWeb.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DataManager dataManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DataManager adataManager)
         {
             _logger = logger;
+            dataManager = adataManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(dataManager.ProductSiteCardRep.ProductSiteCards);
         }
 
         public IActionResult Privacy()

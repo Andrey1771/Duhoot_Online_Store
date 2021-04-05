@@ -49,7 +49,7 @@ namespace OnlineShopDuhootWeb.Migrations
                         new
                         {
                             Id = "58704fbc-843e-47bc-971a-1e28bccf6501",
-                            ConcurrencyStamp = "b3ac15cf-c756-40ca-8888-32a1fe1ee503",
+                            ConcurrencyStamp = "30ee76a1-a93a-44e8-b30e-ebdc32aa3df4",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -256,14 +256,14 @@ namespace OnlineShopDuhootWeb.Migrations
                         {
                             Id = "3cc5e7b1-5d92-4e56-8149-1d895abf236c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24a822f8-d892-4c2b-9c28-3e18e0ac417d",
+                            ConcurrencyStamp = "06a4182e-7d8e-42b8-81a9-014cdebac373",
                             DateBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHiNxybI/peE37Oj/qAEWo6oIdBDOSNnYdr4mCe/OiL1YuURvkQx2iJkaA5DgkhNFA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIuxh7Ikuc8tqrg9aElX+cKY9drnDkf7EmNQUcsW8z8cEyls6z9xgUKfW99DuJ7VsQ==",
                             PhoneNumberConfirmed = false,
                             Postcode = 0,
                             SecurityStamp = "",
@@ -326,6 +326,46 @@ namespace OnlineShopDuhootWeb.Migrations
                             Description = "Test_Description_1",
                             Location = "Test_Location_1",
                             Name = "Test_Name_1_Producer"
+                        },
+                        new
+                        {
+                            ProducerId = 2,
+                            ContactInformation = "Test_ContactInformation_2",
+                            Description = "Test_Description_2",
+                            Location = "Test_Location_2",
+                            Name = "Test_Name_2_Producer"
+                        },
+                        new
+                        {
+                            ProducerId = 3,
+                            ContactInformation = "Test_ContactInformation_3",
+                            Description = "Test_Description_3",
+                            Location = "Test_Location_3",
+                            Name = "Test_Name_3_Producer"
+                        },
+                        new
+                        {
+                            ProducerId = 4,
+                            ContactInformation = "Test_ContactInformation_4",
+                            Description = "Test_Description_4",
+                            Location = "Test_Location_4",
+                            Name = "Test_Name_4_Producer"
+                        },
+                        new
+                        {
+                            ProducerId = 5,
+                            ContactInformation = "Test_ContactInformation_5",
+                            Description = "Test_Description_5",
+                            Location = "Test_Location_5",
+                            Name = "Test_Name_5_Producer"
+                        },
+                        new
+                        {
+                            ProducerId = 6,
+                            ContactInformation = "Test_ContactInformation_6",
+                            Description = "Test_Description_6",
+                            Location = "Test_Location_6",
+                            Name = "Test_Name_6_Producer"
                         });
                 });
 
@@ -358,15 +398,48 @@ namespace OnlineShopDuhootWeb.Migrations
                             Description = "Test_Product_Description",
                             Name = "Test_Product",
                             ProducerId = 1
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Description = "Test_Product_Description_2",
+                            Name = "Test_Product_2",
+                            ProducerId = 1
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            Description = "Test_Product_Description_3",
+                            Name = "Test_Product_3",
+                            ProducerId = 2
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            Description = "Test_Product_Description_4",
+                            Name = "Test_Product_4",
+                            ProducerId = 3
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            Description = "Test_Product_Description_5",
+                            Name = "Test_Product_5",
+                            ProducerId = 4
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            Description = "Test_Product_Description_6",
+                            Name = "Test_Product_6",
+                            ProducerId = 5
                         });
                 });
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.ProductSiteCard", b =>
                 {
-                    b.Property<int>("ProductCardId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("BackgroundImage")
                         .HasColumnType("nvarchar(max)");
@@ -376,9 +449,6 @@ namespace OnlineShopDuhootWeb.Migrations
 
                     b.Property<DateTime>("DateTimeAdded")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
@@ -395,25 +465,70 @@ namespace OnlineShopDuhootWeb.Migrations
                     b.Property<int>("TypeCard")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductCardId");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("ProductId");
 
                     b.ToTable("ProductSiteCards");
 
                     b.HasData(
                         new
                         {
-                            ProductCardId = 1,
-                            BackgroundImage = "images/footerBack.png",
-                            CountComments = 3255,
-                            DateTimeAdded = new DateTime(2021, 4, 3, 19, 56, 12, 877, DateTimeKind.Local).AddTicks(9471),
                             ProductId = 1,
-                            Rating = 3,
-                            RightTopText = "Test_RightTopText",
-                            Text = "Test_Text_Product",
-                            Title = "Test_Title_Product",
+                            BackgroundImage = "images/footerBack.jpg",
+                            CountComments = 365,
+                            DateTimeAdded = new DateTime(2021, 4, 5, 23, 10, 12, 896, DateTimeKind.Local).AddTicks(5291),
+                            Rating = 4,
+                            RightTopText = "$2,990",
+                            Text = "2 bedroom house for rent in Dubai",
+                            Title = "VISION AGENCY",
+                            TypeCard = 0
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            BackgroundImage = "images/footerBack.jpg",
+                            CountComments = 1109,
+                            DateTimeAdded = new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6311),
+                            Rating = 5,
+                            RightTopText = "$3,100,000",
+                            Text = "3 bedroom apartment in Moscow",
+                            Title = "Moscow Hostel",
+                            TypeCard = 1
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            BackgroundImage = "images/footerBack.jpg",
+                            CountComments = 627,
+                            DateTimeAdded = new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6329),
+                            Rating = 4,
+                            RightTopText = "$5,990",
+                            Text = "High quality education and student life",
+                            Title = "MIET",
                             TypeCard = 2
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            BackgroundImage = "images/footerBack.jpg",
+                            CountComments = 550,
+                            DateTimeAdded = new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6332),
+                            Rating = 5,
+                            RightTopText = "$99",
+                            Text = "Hookah bar and modern music club",
+                            Title = "Euphoria",
+                            TypeCard = 3
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            BackgroundImage = "images/footerBack.jpg",
+                            CountComments = 365,
+                            DateTimeAdded = new DateTime(2021, 4, 5, 23, 10, 12, 897, DateTimeKind.Local).AddTicks(6334),
+                            Rating = 4,
+                            RightTopText = "$190",
+                            Text = "Bus transportation between major cities",
+                            Title = "TravelSuit",
+                            TypeCard = 4
                         });
                 });
 
@@ -532,8 +647,8 @@ namespace OnlineShopDuhootWeb.Migrations
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.ProductSiteCard", b =>
                 {
                     b.HasOne("OnlineShopDuhootWeb.Areas.Identity.Data.Product", "Product")
-                        .WithMany("SiteCards")
-                        .HasForeignKey("ProductId")
+                        .WithOne("SiteCard")
+                        .HasForeignKey("OnlineShopDuhootWeb.Areas.Identity.Data.ProductSiteCard", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -578,7 +693,7 @@ namespace OnlineShopDuhootWeb.Migrations
 
             modelBuilder.Entity("OnlineShopDuhootWeb.Areas.Identity.Data.Product", b =>
                 {
-                    b.Navigation("SiteCards");
+                    b.Navigation("SiteCard");
                 });
 #pragma warning restore 612, 618
         }

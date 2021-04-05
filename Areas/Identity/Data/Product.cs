@@ -19,6 +19,6 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
         public string Description { get; set; }
 
         public List<Order> Orders { get; set; }
-        public List<ProductSiteCard> SiteCards { get; set; }
+        public ProductSiteCard SiteCard { get; set; }
     }
 }

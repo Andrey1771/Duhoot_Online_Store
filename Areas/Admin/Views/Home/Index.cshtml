@@ -5,12 +5,12 @@
     ViewBag.Title = strTitle;
 }
 
-<div>
+<div class="admin__container">
     <h1>@strTitle</h1>
     <div>
-        <h3>Наши услуги</h3>
+        <h3>Добавление</h3>
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить услугу</a>
+            <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить товар</a>
         </div>
         @if (Model.Any())
         {
@@ -18,14 +18,14 @@
                 @foreach (ProductSiteCard entity in Model)
                 {
                     <div>
-                        <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.ProductCardId">редактировать</a>
+                        <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.ProductId">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.ProductCardId" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.ProductCardId">
-                            <a href="#" onclick="document.getElementById('form-@entity.ProductCardId').submit();">удалить</a>
+                        <form style="display: inline-block;" id="form-@entity.ProductId" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.ProductId">
+                            <a href="#" onclick="document.getElementById('form-@entity.ProductId').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.ProductCardId">
+                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.ProductId">
                             @($"{entity.Title}")
                         </a>
                     </div>
@@ -34,10 +34,18 @@
         }
     </div>
     <div class="div-box">
-        <h3>Редактировать страницы сайта</h3>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услуги</a>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
+        <h3>Редактировать Карточку</h3>
+        @if (Model.Any())
+        {
+            <div class="changeCard__container">
+                @foreach (ProductSiteCard entity in Model)
+                {
+                    <a class="changeCard__content" asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" asp-route-id="@entity.ProductId">
+                        @await Html.PartialAsync("CardPartial", entity)
+                    </a>
+                }
+            </div>
+        }
     </div>
     <div class="div-box">
         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">

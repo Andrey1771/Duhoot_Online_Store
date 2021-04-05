@@ -19,9 +19,14 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
             DateTimeAdded = DateTime.Now;
         }
 
+        
+        /*[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductCardId { get; set; }*/
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
         [Required]
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductCardId { get; set; }
+        [Key]
+        public int ProductId { get; set; }
 
         [Display(Name = "Название продукта")]
         public virtual string Title { get; set; }
@@ -47,9 +52,7 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 
         public DateTime DateTimeAdded { get; set; }
 
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
-        public int ProductId { get; set; }
+        
 
     }
 }
