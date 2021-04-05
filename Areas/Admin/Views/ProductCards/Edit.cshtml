@@ -1,0 +1,102 @@
+﻿@model ProductSiteCard
+@{
+    string strTitle = "Редактировать карточку";
+    ViewBag.Title = strTitle;
+}
+
+@*<script src="~/js/ckeditor/ckeditor.js"></script>*@
+
+<div>
+    <h2>@strTitle</h2>
+    <div>
+        <form asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" asp-for="DateTimeAdded" />
+            <input type="hidden" asp-for="BackgroundImage" />
+
+            <div asp-validation-summary="All"></div>
+            <div class="div-box">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Text"></label>
+                <textarea asp-for="Text"></textarea>
+                <span asp-validation-for="Text"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="BackgroundImage"></label>
+                <input type="file" name="titleImageFile" id="titleImageFile" />
+                <div>
+                    <img class="img-block" src="@Model.BackgroundImage" />
+                </div>
+            </div>
+            <div class="div-box">
+                <label asp-for="RightTopText"></label>
+                <input asp-for="RightTopText" />
+                <span asp-validation-for="RightTopText"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="Rating"></label>
+                <input asp-for="Rating" />
+                <span asp-validation-for="Rating"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="CountComments"></label>
+                <input asp-for="CountComments" />
+                <span asp-validation-for="CountComments"></span>
+            </div>
+            <div class="div-box">
+                <label asp-for="TypeCard"></label>
+                <input asp-for="TypeCard" />
+                <span asp-validation-for="TypeCard"></span>
+            </div>
+            <input type="submit" value="Сохранить" />
+        </form>
+    </div>
+</div>
+
+
+@*
+
+    [ForeignKey("ProductId")]
+            public Product Product { get; set; }
+            [Required]
+            [Key]
+            public int ProductId { get; set; } Ok
+
+            [Display(Name = "Название продукта")]
+            public virtual string Title { get; set; } Ok
+
+            [Display(Name = "Текст под продуктом")]
+            public virtual string Text { get; set; } Ok
+
+            [Display(Name = "Картинка на фоне")]
+            public virtual string BackgroundImage { get; set; } Ok
+
+            [Display(Name = "Дополнительный текст в овале")]
+            public virtual string RightTopText { get; set; } Ok
+
+            [Display(Name = "Рейтинг продукта")]
+            public virtual int Rating { get; set; } Ok // TODO Необходимо реализовать расчет этих параметров в зависимости от Оценок пользавтелей
+
+            [Display(Name = "Количество комментариев")]
+            public virtual int CountComments { get; set; } Ok//
+
+            [Display(Name = "Тип карты продукта")]
+            public virtual TypeCard TypeCard { get; set; } Ok
+
+
+            public DateTime DateTimeAdded { get; set; } Ok
+
+
+*@
+
+
+@*<script>
+        window.onload = function() {
+            var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Text)');
+            newCKEdit.updateElement();
+        }
+    </script>*@

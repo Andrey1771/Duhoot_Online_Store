@@ -51,8 +51,5 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 
 
         public DateTime DateTimeAdded { get; set; }
-
-        
-
     }
 }
