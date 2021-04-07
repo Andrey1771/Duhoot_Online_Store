@@ -32,8 +32,18 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveSiteCard(ProductSiteCard entity)
         {
-            if(entity.ProductId == default)
+            /*            var minId = dbContext.ProductSiteCards.Min(e => e.ProductId);*/
+
+            Product product = dbContext.Products.Find(entity.ProductId);
+            if (product == null)
             {
+                //Ошибка, такое невозможно
+                throw new ArgumentException("Ошибка, карточка сайта не привязана к продукту");
+            }
+            if (product.SiteCard == null)
+            {
+                /*product.SiteCard = entity;*/
+
                 dbContext.Entry(entity).State = EntityState.Added;
             }
             else

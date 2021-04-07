@@ -9,10 +9,12 @@
 <div>
     <h2>@strTitle</h2>
     <div>
-        <form asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" method="post" enctype="multipart/form-data">
-            <input type="hidden" asp-for="ProductId" />
-            <input type="hidden" asp-for="DateTimeAdded" />
-            <input type="hidden" asp-for="BackgroundImage" />
+        <form asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ProductId" value="@Model.ProductId"/>
+            <input type="hidden" asp-for="Product" value="@Model.Product" />
+            <input type="hidden" asp-for="DateTimeAdded" value="@Model.DateTimeAdded" />
+            <input type="hidden" asp-for="BackgroundImage" value="@Model.BackgroundImage" />
+            
 
             <div asp-validation-summary="All"></div>
             <div class="div-box">
@@ -27,7 +29,7 @@
             </div>
             <div class="div-box">
                 <label asp-for="BackgroundImage"></label>
-                <input type="file" name="titleImageFile" id="titleImageFile" />
+                <input type="file" name="formImageFile" id="formImageFile" />
                 <div>
                     <img class="img-block" src="@Model.BackgroundImage" />
                 </div>

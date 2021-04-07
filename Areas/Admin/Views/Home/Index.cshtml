@@ -10,7 +10,7 @@
     <div>
         <h3>Добавление</h3>
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить товар</a>
+            <a asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" asp-route-id="">Добавить товар</a>
         </div>
         @if (Model.Any())
         {
@@ -18,14 +18,14 @@
                 @foreach (ProductSiteCard entity in Model)
                 {
                     <div>
-                        <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.ProductId">редактировать</a>
+                        <a asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" asp-route-id="@entity.ProductId">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.ProductId" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.ProductId">
+                        <form style="display: inline-block;" id="form-@entity.ProductId" asp-area="Admin" asp-controller="ProductCards" asp-action="Delete" method="post">
+                            <input type="hidden" name="cardId" value="@entity.ProductId">
                             <a href="#" onclick="document.getElementById('form-@entity.ProductId').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.ProductId">
+                        <a asp-area="" asp-controller="ProductCards" asp-action="Index" asp-route-id="@entity.ProductId">
                             @($"{entity.Title}")
                         </a>
                     </div>
