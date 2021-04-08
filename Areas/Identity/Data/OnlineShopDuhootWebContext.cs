@@ -58,6 +58,14 @@ namespace OnlineShopDuhootWeb.Data
             });
 
 
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "ddae7fb2-045e-4ca2-a67c-e4962289adad",
+                Name = "client",
+                NormalizedName = "CLIENT"
+            });
+
+
             var producers = new List<Producer>{
                 new Producer{
                 Name = "Test_Name_1_Producer",
