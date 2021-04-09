@@ -9,27 +9,27 @@
             case TypeCard.House:
                 bgCard = "green__bg";
                 typeCard = "green__card";
-                imgProperties = @"src=images/houseWhite.svg alt=house.svg";
+                imgProperties = "images/houseWhite.svg alt=house.svg";
                 break;
             case TypeCard.Human:
                 bgCard = "red__bg";
                 typeCard = "red__card";
-                imgProperties = @"src=images/girlWhite.svg alt=girl.svg";
+                imgProperties = "images/girlWhite.svg alt=girl.svg";
                 break;
             case TypeCard.Education:
                 bgCard = "blue__bg";
                 typeCard = "blue__card";
-                imgProperties = @"src=images/hatWhite.svg alt=hat.svg";
+                imgProperties = "images/hatWhite.svg alt=hat.svg";
                 break;
             case TypeCard.Music:
                 bgCard = "orange__bg";
                 typeCard = "orange__card";
-                imgProperties = @"src=images/musicWhite.svg alt=music.svg";
+                imgProperties = "images/musicWhite.svg alt=music.svg";
                 break;
             case TypeCard.Transport:
                 bgCard = "purple__bg";
                 typeCard = "purple__card";
-                imgProperties = @"src=images/busWhite.svg alt=bus.svg";
+                imgProperties = "images/busWhite.svg alt=bus.svg";
                 break;
             default:
                 break;
@@ -39,12 +39,12 @@
     <div class="card-content">
 
         <div class="card__image">
-            <img class="card__bg" src=@Model.BackgroundImage alt="backgroundCard">
+            <img class="card__bg" src=~/@Model.BackgroundImage alt="backgroundCard">
             <div class="card__price @bgCard">
                 @Model.RightTopText
             </div>
             <div class="card__icon @bgCard">
-                <img @imgProperties class="filter__icon">
+                <img src=~/@imgProperties class="filter__icon">
             </div>
 
 

@@ -10,15 +10,12 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : Controller
     {
-        private readonly DataManager dataManager;
-
-        public HomeController(DataManager adataManager)
+        public HomeController()
         {
-            dataManager = adataManager;
         }
         public IActionResult Index()
         {
-            return View(dataManager.ProductSiteCardRep.ProductSiteCards);
+            return View();
         }
     }
 }

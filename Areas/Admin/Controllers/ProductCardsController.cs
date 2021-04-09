@@ -25,17 +25,17 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(dataManager.ProductSiteCardRep.ProductSiteCards);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult ProductCardEdit(int id)
         {
             var siteCard = id == default ? new ProductSiteCard() : dataManager.ProductSiteCardRep.GetSiteCardById(id);
             return View(siteCard);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductSiteCard model, IFormFile formImageFile/*Добавить проверку на картинку*/)
+        public IActionResult ProductCardEdit(ProductSiteCard model, IFormFile formImageFile/*Добавить проверку на картинку*/)
         {
             if(ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int cardId)
+        public IActionResult ProductCardDelete(int cardId)
         {
             dataManager.ProductSiteCardRep.DeleteSiteCard(cardId);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());

@@ -41,6 +41,8 @@ namespace OnlineShopDuhootWeb
         {
             //AddTransient, тк объекты легковесные
             services.AddTransient<IProductSiteCardRepository, EFProductSiteCard>();
+            services.AddTransient<IProductRepository, EFProduct>();
+            services.AddTransient<IProducerRepository, EFProducer>();
             services.AddTransient<DataManager>();
             
             // получаем строку подключения из файла конфигурации

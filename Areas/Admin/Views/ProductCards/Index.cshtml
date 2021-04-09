@@ -1,0 +1,51 @@
+﻿@model IQueryable<ProductSiteCard>
+
+@{
+    string strTitle = "Панель Администратора";
+    ViewBag.Title = strTitle;
+}
+
+<div class="admin__container">
+    <h1>@strTitle</h1>
+    <div>
+        <h3>Добавление</h3>
+        <div class="div-box">
+            <a asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" asp-route-id="">Добавить товар</a>
+        </div>
+        @if (Model.Any())
+        {
+            <div>
+                @foreach (ProductSiteCard entity in Model)
+                {
+                    <div>
+                        <a asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" asp-route-id="@entity.ProductId">редактировать</a>
+                        |
+                        <form style="display: inline-block;" id="form-@entity.ProductId" asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardDelete" method="post">
+                            <input type="hidden" name="cardId" value="@entity.ProductId">
+                            <a href="#" onclick="document.getElementById('form-@entity.ProductId').submit();">удалить</a>
+                        </form>
+                        |
+                        <a asp-area="" asp-controller="ProductCards" asp-action="Index" asp-route-id="@entity.ProductId">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div class="div-box">
+        <h3>Редактировать Карточку</h3>
+        @if (Model.Any())
+        {
+            <div class="changeCard__container">
+                @foreach (ProductSiteCard entity in Model)
+                {
+                    <a class="changeCard__content" asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" asp-route-id="@entity.ProductId">
+                        @await Html.PartialAsync("CardPartial", entity)
+                    </a>
+                }
+            </div>
+        }
+    </div>
+    @Html.RenderPartialAsync("LogoutPartial")
+</div>

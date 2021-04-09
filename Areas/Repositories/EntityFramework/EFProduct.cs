@@ -1,46 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 {
-    public class EFProductSiteCard : IProductSiteCardRepository
+    public class EFProduct : IProductRepository
     {
-        public IQueryable<ProductSiteCard> ProductSiteCards => dbContext.ProductSiteCards;
+        public IQueryable<Product> Products => dbContext.Products;
+
         private readonly OnlineShopDuhootWebContext dbContext;
-        public EFProductSiteCard(OnlineShopDuhootWebContext context)
+
+        public EFProduct(OnlineShopDuhootWebContext context)
         {
             dbContext = context;
         }
-        
 
-        public void DeleteSiteCard(int id)
+        public void DeleteProduct(int id)
         {
-            dbContext.Remove(new ProductSiteCard() { ProductId = id });
+            dbContext.Remove(new Product() { ProductId = id });
             dbContext.SaveChanges();//Может не работать правильно async
         }
 
-        public ProductSiteCard GetSiteCardById(int id)
+        public Product GetProductById(int id)
         {
-            return dbContext.ProductSiteCards.FirstOrDefault(x => x.ProductId == id);
+            return dbContext.Products.FirstOrDefault(x => x.ProductId == id);
         }
 
-        public void SaveSiteCard(ProductSiteCard entity)
+        public void SaveProduct(Product entity)
         {
-            /*            var minId = dbContext.ProductSiteCards.Min(e => e.ProductId);*/
-
-            Product product = dbContext.Products.Find(entity.ProductId);
-            if (product == null)
+            Producer producer = dbContext.Producers.Find(entity.ProductId);
+            if (producer == null)
             {
                 //Ошибка, такое невозможно
                 throw new ArgumentException("Ошибка, карточка сайта не привязана к продукту");
             }
-            if (product.SiteCard == null)
+            if (producer.Products.Count(e => e == entity) == 0)
             {
                 /*product.SiteCard = entity;*/
 

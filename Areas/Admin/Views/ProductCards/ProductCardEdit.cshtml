@@ -9,12 +9,12 @@
 <div>
     <h2>@strTitle</h2>
     <div>
-        <form asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" method="post" enctype="multipart/form-data">
-            <input type="hidden" asp-for="ProductId" value="@Model.ProductId"/>
+        <form asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
             <input type="hidden" asp-for="Product" value="@Model.Product" />
             <input type="hidden" asp-for="DateTimeAdded" value="@Model.DateTimeAdded" />
             <input type="hidden" asp-for="BackgroundImage" value="@Model.BackgroundImage" />
-            
+
 
             <div asp-validation-summary="All"></div>
             <div class="div-box">
@@ -57,6 +57,7 @@
             <input type="submit" value="Сохранить" />
         </form>
     </div>
+    @Html.RenderPartialAsync("LogoutPartial")
 </div>
 
 

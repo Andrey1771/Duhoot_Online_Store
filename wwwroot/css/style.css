@@ -1498,3 +1498,20 @@ input.subscribe__text::placeholder {
 .changeCard__content{
 
 }
+
+
+.flexTable1 div div,
+.flexTable2 div div {
+    border: 1px solid #a9a6a3;
+    padding: 3px;
+}
+
+
+.flexTable1 {
+    flex-direction: row;
+    display: flex;
+}
+
+.flexTable2 > div {
+    display: flex;
+}

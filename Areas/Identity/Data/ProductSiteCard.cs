@@ -51,5 +51,15 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
 
 
         public DateTime DateTimeAdded { get; set; }
+
+
+        public bool IsEmpty()
+        {
+            if ((Product, ProductId, Title, Text, BackgroundImage,
+                RightTopText, Rating, CountComments, TypeCard, DateTimeAdded) == default)
+                return true;
+            return false;
+        }
+
     }
 }
