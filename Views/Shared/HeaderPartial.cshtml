@@ -1,38 +1,38 @@
-﻿<header>
-    <div class="head__container">
-        <!-- lock-padding Добавить, когда будет в ASP-->
-
-        <div class="spacer"></div>
-        <div class="special__container">
-            <div class="container__menu">
-                <div class="container__logo">
-                    <a href="" class="logo">
-                        <img src="~/images/logo.svg" alt="logo.svg" class="img__logo">
-                        <p>duhoot</p>
-                        <!--Название магазина-->
-                    </a>
-                </div>
-                <div class="container__menu__links__search__login">
-                    <div class="container__menu__links">
-                        <nav class="menu__links">
-                            <a href="">REALITY</a>
-                            <a href="">LIVING</a>
-                            <a href="">EDUCATION</a>
-                            <a href="">ENTERTAINMENT</a>
-                            <a href="">MOBILITY</a>
-                        </nav>
-                    </div>
-                    <a class="link__menu__search" href="">
-                        <img src="~/images/search.svg" alt="search.svg" class="img__search">
-                    </a>
-                </div>
-                <div class="header__burger">
-                    <span></span>
-                </div>
+﻿<header class="header">
+    <div class="container">
+        <div class="header__body">
+            <a href="" class="header__logo">
+                <img src="~/images/logo.svg" alt="logo">
+                <p>@Config.CompanyName</p>
+            </a>
+            <div class="header__burger">
+                <span></span>
             </div>
+            <nav class="header__menu">
+                <ul class="header__list">
+                    <li>
+                        <a href="" class="header__link">REALITY</a>
+                    </li>
+                    <li>
+                        <a href="" class="header__link">LIVING</a>
+                    </li>
+                    <li>
+                        <a href="" class="header__link">EDUCATION</a>
+                    </li>
+                    <li>
+                        <a href="" class="header__link">ENTERTAINMENT</a>
+                    </li>
+                    <li>
+                        <a href="" class="header__link">MOBILITY</a>
+                    </li>
+                    <li class="flex__link">
+                        <a href="" class="header__link"><img src="~/images/search.svg" alt="search" class="header__icon">SEARCH</a>
+                    </li>
+                    <li class="flex__link">
+                        <a href="" class="header__link"><img src="~/images/login.svg" alt="login" class="header__icon">LOGIN</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <a class="link__menu__login popup__login-link" href="#popup__login">
-            <img src="~/images/login.svg" alt="login.svg" class="img__login">
-        </a>
     </div>
 </header>

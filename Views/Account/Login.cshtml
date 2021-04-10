@@ -40,32 +40,37 @@
     </form>*@
 @{
     ViewData["Title"] = "Login";
+    Layout = "_AccountLayout";
 }
 
 @model LoginViewModel
-<div>
-    <h1>Вход в личный кабинет</h1>
-    <div>
-        <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
-            <div asp-validation-summary="All"></div>
-            <div>
-                <label asp-for="UserName"></label>
-                <input asp-for="UserName" />
-                <span asp-validation-for="UserName"></span>
-            </div>
-            <div>
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div>
-                <label asp-for="RememberMe"></label>
-                <input asp-for="RememberMe" />
-                <span asp-validation-for="RememberMe"></span>
-            </div>
-            <div>
-                <input type="submit" value="Войти" />
-            </div>
-        </form>
+<div class="container">
+    <div class="logo">
+        <img src="~/images/logo.svg" alt="logo">
+        @Config.CompanyName
     </div>
+    <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
+        <div class="form__title">
+            <h2>Login</h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="form__items">
+            <div class="form__item">
+                <label asp-for="UserName">Username</label>
+                <input asp-for="UserName" required/>
+            </div>
+            <div class="form__item">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" required/>
+            </div>
+            <div class="form__item checkbox">
+                <label asp-for="RememberMe"></label>
+                <input asp-for="RememberMe"/>
+            </div>
+            <div class="form__item">
+                <input type="submit" name="submit" value="Login">
+            </div>
+        </div>
+    </form>
+    @*<a href="#">Регистрация</a>*@
 </div>

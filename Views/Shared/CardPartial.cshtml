@@ -2,34 +2,40 @@
 @{
     string typeCard = "";
     string bgCard = "";
-    string imgProperties = "";
+    string imgSrc = "";
+    string imgAlt = "";
     if (Model != null)//TODO Расширить проверку ниже
         switch (Model.TypeCard)
         {
             case TypeCard.House:
                 bgCard = "green__bg";
                 typeCard = "green__card";
-                imgProperties = "images/houseWhite.svg alt=house.svg";
+                imgSrc = "images/houseWhite.svg";
+                imgAlt = "alt=house.svg";
                 break;
             case TypeCard.Human:
                 bgCard = "red__bg";
                 typeCard = "red__card";
-                imgProperties = "images/girlWhite.svg alt=girl.svg";
+                imgSrc = "images/girlWhite.svg";
+                imgAlt = "alt=girl.svg";
                 break;
             case TypeCard.Education:
                 bgCard = "blue__bg";
                 typeCard = "blue__card";
-                imgProperties = "images/hatWhite.svg alt=hat.svg";
+                imgSrc = "images/hatWhite.svg";
+                imgAlt = "hat.svg";
                 break;
             case TypeCard.Music:
                 bgCard = "orange__bg";
                 typeCard = "orange__card";
-                imgProperties = "images/musicWhite.svg alt=music.svg";
+                imgSrc = "images/musicWhite.svg";
+                imgAlt = "music.svg";
                 break;
             case TypeCard.Transport:
                 bgCard = "purple__bg";
                 typeCard = "purple__card";
-                imgProperties = "images/busWhite.svg alt=bus.svg";
+                imgSrc = "images/busWhite.svg";
+                imgAlt = "bus.svg";
                 break;
             default:
                 break;
@@ -44,7 +50,7 @@
                 @Model.RightTopText
             </div>
             <div class="card__icon @bgCard">
-                <img src=~/@imgProperties class="filter__icon">
+                <img src=~/@imgSrc alt="@imgAlt" class="filter__icon">
             </div>
 
 

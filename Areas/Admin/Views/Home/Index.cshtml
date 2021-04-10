@@ -9,7 +9,7 @@
         <ul>
             <li>
                 <a asp-area="Admin" asp-controller="Producer" asp-action="Index" asp-route-id="">
-                    Панель управления продуктами
+                    Панель управления производителей
                 </a>
             </li>
             <li>
@@ -24,6 +24,6 @@
             </li>
         </ul>
 
-        @Html.RenderPartialAsync("LogoutPartial")
+        @await Html.PartialAsync("LogoutPartial")
     </div>
 </div>

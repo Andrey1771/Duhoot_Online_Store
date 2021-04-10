@@ -53,7 +53,7 @@
         </form>
     }
     <a asp-area="Admin" asp-controller="Product" asp-action="ProductEdit" asp-route-id="">Добавить продукт</a>
-    @Html.RenderPartialAsync("LogoutPartial")
+    @await Html.PartialAsync("LogoutPartial")
 </div>
 
 
