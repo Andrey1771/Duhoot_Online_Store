@@ -62,6 +62,11 @@ namespace OnlineShopDuhootWeb.Controllers
         }
 
 
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]

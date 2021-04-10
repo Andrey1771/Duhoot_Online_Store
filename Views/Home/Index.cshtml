@@ -1,9 +1,15 @@
 ﻿@model IQueryable<ProductSiteCard>
 
+
+
 <div class="what__container">
     <div class="container">
         <div class="search__back">
             <form class="search">
+                @if (User.IsInRole("admin"))
+                {
+                    <a class="admin__panel" href="/Admin/Home/Index">Открыть панель администратора</a>
+                }
                 <div class="search__what">What are you looking for?</div>
                 <div class="search__comboboxes">
                     <select>
@@ -68,7 +74,6 @@
     <hr class="content-up__endLine">
 </div>
 <div class="content__container">
-    <!--Данные элементы будут храниться на сервере и будут автозаполняемыми, эх, придется в будущем тут пострадать неплохо. Тут одна карточка, которая будет шаблоном-->
     <div class="container">
         <div class="cards__container">
             @foreach (ProductSiteCard card in Model)
