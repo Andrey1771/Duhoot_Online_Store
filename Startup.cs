@@ -21,7 +21,7 @@ using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Areas.Repositories.EntityFramework;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineShopDuhootWeb
 {
@@ -39,6 +39,13 @@ namespace OnlineShopDuhootWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
+
             //AddTransient, тк объекты легковесные
             services.AddTransient<IProductSiteCardRepository, EFProductSiteCard>();
             services.AddTransient<IProductRepository, EFProduct>();

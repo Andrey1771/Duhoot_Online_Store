@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using System.Net;
+using System.IO;
 
 namespace OnlineShopDuhootWeb.Controllers
 {
@@ -78,27 +79,47 @@ namespace OnlineShopDuhootWeb.Controllers
                 var user = new OnlineShopDuhootWebUser() { /*UserName = model.UserName*/ };
                 user.Email = model.Email;
                 user.EmailConfirmed = false;
+
+                user.UserName = user.Email;/*Тк на данном сайте имя пользователя не указывается*/
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // наш email с заголовком письма
-                    MailAddress from = new MailAddress("somemail@yandex.ru", "Web Registration");
-                    // кому отправляем
+                    MailAddress from = new MailAddress("register@duhoot.com", "Web Registration");
                     MailAddress to = new MailAddress(user.Email);
-                    // создаем объект сообщения
                     MailMessage m = new MailMessage(from, to);
-                    // тема письма
                     m.Subject = "Email confirmation";
-                    // текст письма - включаем в него ссылку
                     m.Body = string.Format("Для завершения регистрации перейдите по ссылке:" +
                                     "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
                         Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Scheme/*Request.Url.Scheme*/));
                     m.IsBodyHtml = true;
-                    // адрес smtp-сервера, с которого мы и будем отправлять письмо
-                    SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 25);
-                    // логин и пароль
-                    smtp.Credentials = new NetworkCredential("somemail@yandex.ru", "password");
-                    smtp.Send(m);
+
+                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    {
+                        try
+                        {
+                            //Файл должен содержать данные поля:
+                            //Email
+                            //Password
+                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))
+                            {
+                                string email = reader.ReadLine();
+                                string password = reader.ReadLine();
+                                smtp.Credentials = new NetworkCredential(email, password);
+                            }
+                        }
+                        catch(FileNotFoundException)
+                        {
+                            Console.WriteLine("Письмо не было отправлено на почту, тк файл LoginAndPassword.txt не был найден");
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Письмо не было отправлено на почту, тк возникла ошабка при считывании данных из LoginAndPassword.txt или из-за ошибки со стороны NetworkCredential");
+                        }
+                        
+                        smtp.EnableSsl = true;
+                        smtp.Send(m);
+                    }
+
                     return RedirectToAction("Confirm", "Account", new { Email = user.Email });
                 }
                 else

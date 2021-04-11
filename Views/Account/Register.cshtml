@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RegisterViewModel
+@{
     ViewData["Title"] = "Register";
     Layout = "_AccountLayout";
 }
@@ -19,39 +20,39 @@
         <div class="form__items">
             <div class="form__item">
                 <label for="firstname">First name</label>
-                <input type="text" name="firstname" id="firstname" required>
+                @Html.EditorFor(user => user.FirstName)
             </div>
             <div class="form__item">
                 <label for="secondname">Second name</label>
-                <input type="text" name="secondname" id="secondname" required>
+                @Html.EditorFor(user => user.SecondName)
             </div>
             <div class="form__item">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+                @Html.EditorFor(user => user.Email)
             </div>
             <div class="form__item">
                 <label for="date">Birth date</label>
-                <input type="date" name="date" id="date">
+                @Html.EditorFor(user => user.DateBirth)
             </div>
             <div class="form__item">
                 <label for="country">Country</label>
-                <input type="text" name="country" id="country" required>
+                @Html.EditorFor(user => user.Country)
             </div>
             <div class="form__item">
                 <label for="postcode">Postcode</label>
-                <input type="text" name="postcode" id="postcode" required>
+                @Html.EditorFor(user => user.PostCode)
             </div>
             <div class="form__item">
                 <label for="address">Address</label>
-                <input type="text" name="address" id="address" required>
+                @Html.EditorFor(user => user.Address)
             </div>
             <div class="form__item">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
+                @Html.EditorFor(user => user.Password)
             </div>
             <div class="form__item">
                 <label for="confirm__password">Confirm password</label>
-                <input type="password" name="confirm__password" id="confirm__password" required>
+                @Html.EditorFor(user => user.PasswordConfirm)
             </div>
             <div class="form__item">
                 <input type="submit" name="submit" value="Register">
