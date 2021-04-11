@@ -1551,7 +1551,7 @@ input.subscribe__text::placeholder {
 }
 
 
-.flexTable1 div div,
+/*.flexTable1 div div,
 .flexTable2 div div {
     border: 1px solid #a9a6a3;
     padding: 3px;
@@ -1559,6 +1559,11 @@ input.subscribe__text::placeholder {
 
 
 .flexTable1 {
+    flex-direction: column;
+    display: flex;
+}
+
+.flexRow {
     flex-direction: row;
     display: flex;
 }
@@ -1566,6 +1571,34 @@ input.subscribe__text::placeholder {
 .flexTable2 > div {
     display: flex;
 }
+*/
+.flexTable-container{
+    display: flex;
+    justify-content:flex-start;
+}
+
+.flexTable {
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr 0fr 0fr;
+    grid-gap: 0.1vw;
+}
+
+    .flexTable > div {
+        padding: 0.1em;
+        text-align: center;
+    }
+
+.inlineElement {
+    display: flex;
+    flex-direction: row;
+}
+
+.insertLink{
+    border:thick;
+    border-color:#fff;
+}
+
+
 
 .adminContainer {
     margin-top: 60px;

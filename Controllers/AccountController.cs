@@ -100,7 +100,7 @@ namespace OnlineShopDuhootWeb.Controllers
                             //Файл должен содержать данные поля:
                             //Email
                             //Password
-                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))
+                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))//TODO На настоящем сервере, этого не будет
                             {
                                 string email = reader.ReadLine();
                                 string password = reader.ReadLine();

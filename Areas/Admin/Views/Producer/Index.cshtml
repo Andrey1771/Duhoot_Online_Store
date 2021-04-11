@@ -8,26 +8,24 @@
     <h2>@strTitle</h2>
 
     <p class="tableHeader">Производители</p>
-    <div class="flexTable2">
-        <div>
+
+    <div class="flextTable-container">
+        <div class="flexTable">
             <div>Id</div>
             <div>Название</div>
             <div>Контактная информация</div>
             <div>Расположение</div>
             <div>Описание</div>
             <div>Продукты</div>
-        </div>
-        @{ string actionToProducer = ""; }
-        @foreach (var producer in Model)
-        {
-            <div>
-                <div><input asp-for="@producer.ProducerId" value="@producer.ProducerId" /></div>
+            @{ string actionToProducer = ""; }
+            @foreach (var producer in Model)
+            {
                 <div><input asp-for="@producer.ProducerId" value="@producer.ProducerId" /></div>
                 <div><input asp-for="@producer.Name" value="@producer.Name" /></div>
                 <div><input asp-for="@producer.ContactInformation" value="@producer.ContactInformation" /></div>
                 <div><input asp-for="@producer.Location" value="@producer.Location" /></div>
                 <div><input asp-for="@producer.Description" value="@producer.Description" /></div>
-                <div>
+                <div class="inlineElement">
                     @if (producer.Products != null)
                     {
                         <div>Есть </div>
@@ -38,11 +36,10 @@
                         <div>Нет </div>
                         actionToProducer = "Добавить";
                     }
-                    <a asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="@producer.ProducerId">@actionToProducer</a>
+                    <a class="insertLink" asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="@producer.ProducerId">@actionToProducer</a>
                 </div>
-            </div>
-
-        }
+            }
+        </div>
     </div>
     @if (Model.Any())
     {
