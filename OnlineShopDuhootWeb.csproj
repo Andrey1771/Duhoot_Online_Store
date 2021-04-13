@@ -5,10 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Views\Shared\Новая папка\**" />
     <Compile Remove="Areas\Identity\Pages\**" />
+    <Compile Remove="Новая папка\**" />
+    <Content Remove="Areas\Admin\Views\Shared\Новая папка\**" />
     <Content Remove="Areas\Identity\Pages\**" />
+    <Content Remove="Новая папка\**" />
+    <EmbeddedResource Remove="Areas\Admin\Views\Shared\Новая папка\**" />
     <EmbeddedResource Remove="Areas\Identity\Pages\**" />
+    <EmbeddedResource Remove="Новая папка\**" />
+    <None Remove="Areas\Admin\Views\Shared\Новая папка\**" />
     <None Remove="Areas\Identity\Pages\**" />
+    <None Remove="Новая папка\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,10 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\Новая папка\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="Новая папка\" />
   </ItemGroup>
 
   <ItemGroup>

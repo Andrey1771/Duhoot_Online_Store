@@ -2,6 +2,7 @@
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Data;
+using OnlineShopDuhootWeb.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveProducer(Producer entity)
         {
-            Producer producer = dbContext.Producers.Find(entity);
+            Producer producer = dbContext.Producers.FirstOrDefault(x => x == entity);//////////!!!!!
             if (producer == null)
             {
                 dbContext.Entry(entity).State = EntityState.Added;
@@ -43,6 +44,13 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
                 dbContext.Entry(entity).State = EntityState.Modified;
             }
             dbContext.SaveChanges();//Может не работать правильно async
+        }
+
+        public Producer CreateNewProducer()//TODO Потенциальная оптимизация
+        {
+            var producersId = dbContext.Producers.Select(e => e.ProducerId).ToList();
+            var index = EmptyIndexSearch.Search(producersId);
+            return index == -1 ? null : new Producer() { ProducerId = index};
         }
     }
 }

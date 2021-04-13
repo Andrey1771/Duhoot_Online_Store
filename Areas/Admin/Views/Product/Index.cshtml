@@ -1,4 +1,4 @@
-﻿@model IQueryable<Product>
+﻿@model (IQueryable<Product>, IEnumerable<bool>)
 @{
     string strTitle = "Таблица для редактирование данных продуктов";
     ViewBag.Title = strTitle;
@@ -6,28 +6,27 @@
 
 <div>
     <h2>@strTitle</h2>
-    <table>
-        <caption>Продукты</caption>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Id производителя</th>
-                <th>Название</th>
-                <th>Описание</th>
-                <th>Наличие карточки</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ string actionToCard = ""; }
-            @foreach (var product in Model)
-            {
-                <tr>
-                    <th><input asp-for="@product.ProductId" value="@product.ProductId" /></th>
-                    <td><input asp-for="@product.ProducerId" value="@product.ProducerId" /></td>
-                    <td><input asp-for="@product.Name" value="@product.Name" /></td>
-                    <td><input asp-for="@product.Description" value="@product.Description" /></td>
-                    <td>
-                        @if (product.SiteCard != null)
+        <div>Продукты</div>
+        <div class="flexProductsTable-container">
+            <div class="flexProductsTable">
+                <div>Id</div>
+                <div>Id производителя</div>
+                <div>Название</div>
+                <div>Описание</div>
+                <div>Наличие карточки</div>
+                @{ string actionToCard = "";
+                    var products = Model.Item1;
+                    var containCardEnumerator = Model.Item2.GetEnumerator();
+                }
+                @foreach (var product in Model.Item1)
+                {
+                    <div><input asp-for="@product.ProductId" value="@product.ProductId" /></div>
+                    <div><input asp-for="@product.ProducerId" value="@product.ProducerId" /></div>
+                    <div><input asp-for="@product.Name" value="@product.Name" /></div>
+                    <div><input asp-for="@product.Description" value="@product.Description" /></div>
+                    <div class="inlineElement">
+                        @{containCardEnumerator.MoveNext();}
+                        @if (containCardEnumerator.Current)
                         {
                             <div>Есть </div>
                             actionToCard = "Редактировать";
@@ -37,23 +36,22 @@
                             <div>Нет </div>
                             actionToCard = "Добавить";
                         }
-                        <a asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" asp-route-id="@product.ProductId">@actionToCard</a>
-                    </td>
-                </tr>
-            }
-            @*<form asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" method="post" enctype="multipart/form-data">*@
-        </tbody>
-    </table>
-    @if (Model.Any())
+
+                        <a class="insertLink" asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" asp-route-id="@product.ProductId">@actionToCard</a>
+                    </div>
+                }
+                @*<form asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" method="post" enctype="multipart/form-data">*@
+            </div>
+        </div>
+    @if (Model.Item1.Any())
     {
         <p>Удалить продукт</p>//TODO в будущем добавить js и возомжность удаления через выделение элементов
         <form style="display: inline-block;" asp-area="Admin" id="DeleteProductForm" asp-controller="ProductEdit" asp-action="ProductDelete" method="post">
-            <input name="cardId" type="number" value="1" min="1" max="@Model.Count()">
+            <input name="cardId" type="number" value="1" min="1" max="@Model.Item1.Count()">
             <a href="#" onclick="document.getElementById('DeleteProductForm').submit();">Удалить</a>
         </form>
     }
     <a asp-area="Admin" asp-controller="Product" asp-action="ProductEdit" asp-route-id="">Добавить продукт</a>
-    @await Html.PartialAsync("LogoutPartial")
 </div>
 
 

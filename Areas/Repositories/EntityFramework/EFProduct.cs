@@ -2,6 +2,7 @@
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Data;
+using OnlineShopDuhootWeb.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,13 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
                 dbContext.Entry(entity).State = EntityState.Modified;
             }
             dbContext.SaveChanges();//Может не работать правильно async
+        }
+
+        public Product CreateNewProduct()//TODO Потенциальная оптимизация
+        {
+            var productsId = dbContext.Products.Select(e => e.ProductId).ToList();
+            var index = EmptyIndexSearch.Search(productsId);
+            return index == -1 ? null : new Product() { ProductId = index };
         }
     }
 }

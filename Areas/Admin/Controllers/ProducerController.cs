@@ -28,8 +28,24 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 
         public IActionResult ProducerEdit(int id)
         {
-            var producer = id == default ? new Producer() : dataManager.ProducerRep.GetProducerById(id);
+            var producer = dataManager.ProducerRep.GetProducerById(id);
+            if (producer == null)
+            {
+                producer = dataManager.ProducerRep.CreateNewProducer();
+            }
             return View(producer);
+        }
+
+        [HttpPost]
+        public IActionResult ProducerEdit(Producer model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ProducerId == default) model.ProducerId = dataManager.ProducerRep.CreateNewProducer().ProducerId;
+                dataManager.ProducerRep.SaveProducer(model);
+                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
+            }
+            return View(model);
         }
 
         [HttpPost]

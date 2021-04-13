@@ -30,7 +30,11 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 
         public IActionResult ProductCardEdit(int id)
         {
-            var siteCard = id == default ? new ProductSiteCard() : dataManager.ProductSiteCardRep.GetSiteCardById(id);
+            var siteCard = dataManager.ProductSiteCardRep.GetSiteCardById(id);
+            if(siteCard == null)
+            {
+                siteCard = dataManager.ProductSiteCardRep.CreateNewSiteCard(id);
+            }    
             return View(siteCard);
         }
 

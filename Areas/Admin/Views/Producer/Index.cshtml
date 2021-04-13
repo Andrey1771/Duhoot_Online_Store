@@ -9,8 +9,8 @@
 
     <p class="tableHeader">Производители</p>
 
-    <div class="flextTable-container">
-        <div class="flexTable">
+    <div class="flexProducersTable-container">
+        <div class="flexProducersTable">
             <div>Id</div>
             <div>Название</div>
             <div>Контактная информация</div>
@@ -25,6 +25,7 @@
                 <div><input asp-for="@producer.ContactInformation" value="@producer.ContactInformation" /></div>
                 <div><input asp-for="@producer.Location" value="@producer.Location" /></div>
                 <div><input asp-for="@producer.Description" value="@producer.Description" /></div>
+
                 <div class="inlineElement">
                     @if (producer.Products != null)
                     {
@@ -50,5 +51,4 @@
         </form>
     }
     <a asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="">Добавить продукт</a>
-    @await Html.PartialAsync("LogoutPartial")
 </div>

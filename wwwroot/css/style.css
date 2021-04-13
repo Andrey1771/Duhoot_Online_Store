@@ -1572,18 +1572,18 @@ input.subscribe__text::placeholder {
     display: flex;
 }
 */
-.flexTable-container{
+.flexProducersTable-container {
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
 }
 
-.flexTable {
+.flexProducersTable {
     display: grid;
     grid-template-columns: 0fr 0fr 0fr 0fr 0fr 0fr;
     grid-gap: 0.1vw;
 }
 
-    .flexTable > div {
+    .flexProducersTable > div {
         padding: 0.1em;
         text-align: center;
     }
@@ -1597,6 +1597,23 @@ input.subscribe__text::placeholder {
     border:thick;
     border-color:#fff;
 }
+
+
+.flexProductsTable-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flexProductsTable {
+    display: grid;
+    grid-template-columns: 0fr 0fr 0fr 0fr 0fr;
+    grid-gap: 0.1vw;
+}
+
+    .flexProductsTable > div {
+        padding: 0.1em;
+        text-align: center;
+    }
 
 
 

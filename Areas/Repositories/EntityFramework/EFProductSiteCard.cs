@@ -52,5 +52,10 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
             }
             dbContext.SaveChanges();//Может не работать правильно async
         }
+
+        public ProductSiteCard CreateNewSiteCard(int id)
+        {
+            return new ProductSiteCard() { ProductId = id};
+        }
     }
 }
