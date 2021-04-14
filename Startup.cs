@@ -115,7 +115,7 @@ namespace OnlineShopDuhootWeb
             app.UseDefaultFiles();
             app.UseStaticFiles();
             // добавляем поддержку каталога node_modules
-            app.UseFileServer(new FileServerOptions()
+            app.UseFileServer(new FileServerOptions()// TODO Добавить проверку на существование папки!
             {
                 FileProvider = new PhysicalFileProvider(
                     Path.Combine(env.ContentRootPath, "node_modules")

@@ -1620,6 +1620,13 @@ input.subscribe__text::placeholder {
 .adminContainer {
     margin-top: 60px;
 }
+.admin__container { /*Fix That*/
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-direction: column;
+}
+
 
 .admin__panel {
     font-size: 22px;

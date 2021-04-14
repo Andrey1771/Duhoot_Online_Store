@@ -34,30 +34,36 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveProduct(Product entity)
         {
-            Producer producer = dbContext.Producers.Find(entity.ProductId);
+            Producer producer = dbContext.Producers.Find(entity.ProducerId);
             if (producer == null)
             {
-                //Ошибка, такое невозможно
-                throw new ArgumentException("Ошибка, карточка сайта не привязана к продукту");
+                // Ошибка, такое невозможно
+                throw new ArgumentException("Ошибка, производителя нет для конкретного продукта");
             }
-            if (producer.Products.Count(e => e == entity) == 0)
+            if ((producer.Products == null) || (producer.Products.Count(e => e.ProductId == entity.ProductId) == 0))
             {
                 /*product.SiteCard = entity;*/
-
                 dbContext.Entry(entity).State = EntityState.Added;
+                /*dbContext.*/
             }
             else
             {
                 dbContext.Entry(entity).State = EntityState.Modified;
             }
-            dbContext.SaveChanges();//Может не работать правильно async
+/*            dbContext.Attach(entity);*/
+            /*dbContext.Attach(producer);
+            dbContext.Entry(producer).State = EntityState.Modified;*/
+            /*entity.Producer = producer;
+            producer.Products.Add(entity);
+            dbContext.Entry(producer).State = EntityState.Modified;*/
+            dbContext.SaveChanges();// Может не работать правильно async
         }
 
-        public Product CreateNewProduct()//TODO Потенциальная оптимизация
+        public Product CreateNewProduct()// TODO Потенциальная оптимизация
         {
-            var productsId = dbContext.Products.Select(e => e.ProductId).ToList();
-            var index = EmptyIndexSearch.Search(productsId);
-            return index == -1 ? null : new Product() { ProductId = index };
+            /*var productsId = dbContext.Products.Select(e => e.ProductId).ToList();
+            var index = EmptyIndexSearch.Search(productsId);*/
+            return new Product() { ProductId = default };
         }
     }
 }

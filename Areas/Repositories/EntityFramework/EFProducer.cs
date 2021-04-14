@@ -48,9 +48,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public Producer CreateNewProducer()//TODO Потенциальная оптимизация
         {
-            var producersId = dbContext.Producers.Select(e => e.ProducerId).ToList();
-            var index = EmptyIndexSearch.Search(producersId);
-            return index == -1 ? null : new Producer() { ProducerId = index};
+            return new Producer() { ProducerId = default };
         }
     }
 }
