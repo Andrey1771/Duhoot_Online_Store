@@ -3,7 +3,7 @@ using System;
 
 namespace OnlineShopDuhootWeb.Service.EmailService.SmtpEmailService
 {
-    public class SmtpEmail : Email
+    public class SmtpEmail : IEmail
     {
         public void SendEmail()
         {

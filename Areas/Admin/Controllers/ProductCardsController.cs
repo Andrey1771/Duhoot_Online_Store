@@ -42,10 +42,8 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
                 if(formImageFile != null)
                 {
                     model.BackgroundImage = Path.Combine("images/cardBgs/", formImageFile.FileName);
-                    using (var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/cardBgs/", formImageFile.FileName), FileMode.Create))
-                    {
-                        formImageFile.CopyToAsync(stream);//Убрать Async
-                    }
+                    using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/cardBgs/", formImageFile.FileName), FileMode.Create);
+                    formImageFile.CopyToAsync(stream);//Убрать Async
                 }
                 dataManager.ProductSiteCardRep.SaveSiteCard(model);
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());

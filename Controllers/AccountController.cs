@@ -80,28 +80,26 @@ namespace OnlineShopDuhootWeb.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    MailAddress from = new MailAddress("register@duhoot.com", "Web Registration");
-                    MailAddress to = new MailAddress(user.Email);
-                    MailMessage m = new MailMessage(from, to);
+                    MailAddress from = new("register@duhoot.com", "Web Registration");
+                    MailAddress to = new(user.Email);
+                    MailMessage m = new(from, to);
                     m.Subject = "Email confirmation";
                     m.Body = string.Format("Для завершения регистрации перейдите по ссылке:" +
                                     "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
-                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Scheme));
+                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, user.Email }, Request.Scheme));
                     m.IsBodyHtml = true;
 
-                    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                    using (SmtpClient smtp = new("smtp.gmail.com", 587))
                     {
                         try
                         {
                             // Файл должен содержать данные поля:
                             // Email
                             // Password
-                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))// TODO На настоящем сервере, этого не будет
-                            {
-                                string email = reader.ReadLine();
-                                string password = reader.ReadLine();
-                                smtp.Credentials = new NetworkCredential(email, password);
-                            }
+                            using StreamReader reader = new(@"LoginAndPassword.txt");// TODO На настоящем сервере, этого не будет
+                            string email = reader.ReadLine();
+                            string password = reader.ReadLine();
+                            smtp.Credentials = new NetworkCredential(email, password);
                         }
                         catch(FileNotFoundException)
                         {
@@ -116,7 +114,7 @@ namespace OnlineShopDuhootWeb.Controllers
                         smtp.Send(m);
                     }
 
-                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                    return RedirectToAction("Confirm", "Account", new { user.Email });
                 }
                 else
                 {
@@ -148,7 +146,7 @@ namespace OnlineShopDuhootWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Confirm", "Account", new { Email = user.Email });
+                    return RedirectToAction("Confirm", "Account", new { user.Email });
                 }
             }
             else

@@ -8,10 +8,6 @@ namespace OnlineShopDuhootWeb
     {
         public static void Main(string[] args)
         {
-            if (!Directory.Exists(@"node_modules"))
-            {
-                Directory.CreateDirectory(@"node_modules");
-            }
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -37,7 +37,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
                 // Ошибка, такое невозможно
                 throw new ArgumentException("Ошибка, производителя нет для конкретного продукта");
             }
-            if ((producer.Products == null) || (producer.Products.Count(e => e.ProductId == entity.ProductId) == 0))
+            if ((producer.Products == null) || (!producer.Products.Any(e => e.ProductId == entity.ProductId)))
             {
                 dbContext.Entry(entity).State = EntityState.Added;
             }

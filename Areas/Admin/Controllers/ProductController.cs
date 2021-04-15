@@ -28,7 +28,7 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
         {
             var cards = dataManager.ProductSiteCardRep.ProductSiteCards.ToList();
             var products = dataManager.ProductRep.Products.ToList();
-            List<bool> containCardList = new List<bool>();
+            List<bool> containCardList = new();
 
             foreach (var product in products)
             {

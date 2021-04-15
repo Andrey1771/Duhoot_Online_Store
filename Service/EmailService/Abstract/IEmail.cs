@@ -1,7 +1,7 @@
 ﻿
 namespace OnlineShopDuhootWeb.Service.EmailService.Abstract
 {
-    public interface Email
+    public interface IEmail
     {
         void SendEmail();
     }
