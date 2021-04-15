@@ -2,12 +2,7 @@
 using Microsoft.Extensions.Logging;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-//using OnlineShopDuhootWeb.Context;
 
 namespace OnlineShopDuhootWeb.Controllers
 {
@@ -25,11 +20,6 @@ namespace OnlineShopDuhootWeb.Controllers
         public IActionResult Index()
         {
             return View(dataManager.ProductSiteCardRep.ProductSiteCards);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

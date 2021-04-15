@@ -4,14 +4,18 @@
     ViewBag.Title = strTitle;
 }
 
-@*<script src="~/js/ckeditor/ckeditor.js"></script>*@
-
 <div>
     <h2>@strTitle</h2>
     <div>
         <form asp-area="Admin" asp-controller="ProductCards" asp-action="ProductCardEdit" method="post" enctype="multipart/form-data">
 
             @Html.HiddenFor(card => card.ProductId, @Model?.ProductId)
+            @*            <div class="div-box">
+                    <label asp-for="ProductId"></label>
+                    @Html.EditorFor(card => card.ProductId, @Model?.ProductId)
+                    <span asp-validation-for="ProductId"></span>
+                </div>*@
+
             <div asp-validation-summary="All"></div>
             <div class="div-box">
                 <label asp-for="Title"></label>

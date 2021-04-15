@@ -4,11 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using System.Net;
 using System.IO;
 
@@ -17,7 +14,6 @@ namespace OnlineShopDuhootWeb.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        /// TODO Не уверен по поводу IdentityUser, Нужен DuhootUser?
         private readonly UserManager<OnlineShopDuhootWebUser> userManager;
         private readonly SignInManager<OnlineShopDuhootWebUser> signInManager;
 
@@ -80,7 +76,7 @@ namespace OnlineShopDuhootWeb.Controllers
                 user.Email = model.Email;
                 user.EmailConfirmed = false;
 
-                user.UserName = user.Email;/*Тк на данном сайте имя пользователя не указывается*/
+                user.UserName = user.Email;// Тк на данном сайте имя пользователя не указывается, то имя пользователя - это почта
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -90,17 +86,17 @@ namespace OnlineShopDuhootWeb.Controllers
                     m.Subject = "Email confirmation";
                     m.Body = string.Format("Для завершения регистрации перейдите по ссылке:" +
                                     "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
-                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Scheme/*Request.Url.Scheme*/));
+                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, Email = user.Email }, Request.Scheme));
                     m.IsBodyHtml = true;
 
                     using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                     {
                         try
                         {
-                            //Файл должен содержать данные поля:
-                            //Email
-                            //Password
-                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))//TODO На настоящем сервере, этого не будет
+                            // Файл должен содержать данные поля:
+                            // Email
+                            // Password
+                            using (StreamReader reader = new StreamReader(@"LoginAndPassword.txt"))// TODO На настоящем сервере, этого не будет
                             {
                                 string email = reader.ReadLine();
                                 string password = reader.ReadLine();
@@ -124,7 +120,7 @@ namespace OnlineShopDuhootWeb.Controllers
                 }
                 else
                 {
-                    //AddErrors(result);
+                    // AddErrors(result);
                 }
             }
             return View(model);

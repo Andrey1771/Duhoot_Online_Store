@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Service;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 {

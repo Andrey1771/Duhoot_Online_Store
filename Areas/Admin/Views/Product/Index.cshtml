@@ -45,7 +45,7 @@
         </div>
     @if (Model.Item1.Any())
     {
-        <p>Удалить продукт</p>//TODO в будущем добавить js и возомжность удаления через выделение элементов
+        <p>Удалить продукт</p>// TODO в будущем добавить js и возомжность удаления через выделение элементов
         <form style="display: inline-block;" asp-area="Admin" id="DeleteProductForm" asp-controller="ProductEdit" asp-action="ProductDelete" method="post">
             <input name="cardId" type="number" value="1" min="1" max="@Model.Item1.Count()">
             <a href="#" onclick="document.getElementById('DeleteProductForm').submit();">Удалить</a>
@@ -53,57 +53,3 @@
     }
     <a asp-area="Admin" asp-controller="Product" asp-action="ProductEdit" asp-route-id="">Добавить продукт</a>
 </div>
-
-
-@*<div>
-        <h2>@strTitle</h2>
-        <div>
-            <form asp-area="Admin" asp-controller="ProductCards" asp-action="Edit" method="post" enctype="multipart/form-data">
-                <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
-                <input type="hidden" asp-for="Product" value="@Model.Product" />
-                <input type="hidden" asp-for="DateTimeAdded" value="@Model.DateTimeAdded" />
-                <input type="hidden" asp-for="BackgroundImage" value="@Model.BackgroundImage" />
-
-
-                <div asp-validation-summary="All"></div>
-                <div class="div-box">
-                    <label asp-for="Title"></label>
-                    <input asp-for="Title" />
-                    <span asp-validation-for="Title"></span>
-                </div>
-                <div class="div-box">
-                    <label asp-for="Text"></label>
-                    <textarea asp-for="Text"></textarea>
-                    <span asp-validation-for="Text"></span>
-                </div>
-                <div class="div-box">
-                    <label asp-for="BackgroundImage"></label>
-                    <input type="file" name="formImageFile" id="formImageFile" />
-                    <div>
-                        <img class="img-block" src="@Model.BackgroundImage" />
-                    </div>
-                </div>
-                <div class="div-box">
-                    <label asp-for="RightTopText"></label>
-                    <input asp-for="RightTopText" />
-                    <span asp-validation-for="RightTopText"></span>
-                </div>
-                <div class="div-box">
-                    <label asp-for="Rating"></label>
-                    <input asp-for="Rating" />
-                    <span asp-validation-for="Rating"></span>
-                </div>
-                <div class="div-box">
-                    <label asp-for="CountComments"></label>
-                    <input asp-for="CountComments" />
-                    <span asp-validation-for="CountComments"></span>
-                </div>
-                <div class="div-box">
-                    <label asp-for="TypeCard"></label>
-                    <input asp-for="TypeCard" />
-                    <span asp-validation-for="TypeCard"></span>
-                </div>
-                <input type="submit" value="Сохранить" />
-            </form>
-        </div>
-    </div>*@

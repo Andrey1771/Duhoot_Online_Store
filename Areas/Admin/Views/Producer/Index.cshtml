@@ -44,7 +44,7 @@
     </div>
     @if (Model.Any())
     {
-        <p>Удалить производителя</p>//TODO в будущем добавить js и возомжность удаления через выделение элементов
+        <p>Удалить производителя</p>// TODO в будущем добавить js и возомжность удаления через выделение элементов
         <form style="display: inline-block;" asp-area="Admin" id="DeleteProducerForm" asp-controller="ProducerEdit" asp-action="ProducerDelete" method="post">
             <input name="producerId" type="number" value="1" min="1" max="@Model.Count()">
             <a href="#" onclick="document.getElementById('DeleteProducerForm').submit();">Удалить</a>

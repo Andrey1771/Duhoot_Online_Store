@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Data;
+using OnlineShopDuhootWeb.Service;
 
 namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 {
@@ -22,7 +20,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
         public void DeleteSiteCard(int id)
         {
             dbContext.Remove(new ProductSiteCard() { ProductId = id });
-            dbContext.SaveChanges();//Может не работать правильно async
+            dbContext.SaveChangesAsync();
         }
 
         public ProductSiteCard GetSiteCardById(int id)
@@ -32,30 +30,22 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveSiteCard(ProductSiteCard entity)
         {
-            /*            var minId = dbContext.ProductSiteCards.Min(e => e.ProductId);*/
-
-            Product product = dbContext.Products.Find(entity.ProductId);
-            if (product == null)
+            if (dbContext.ProductSiteCards.FirstOrDefault(e => e.ProductId == entity.ProductId) == default)
             {
-                //Ошибка, такое невозможно
-                throw new ArgumentException("Ошибка, карточка сайта не привязана к продукту");
-            }
-            if (product.SiteCard == null)
-            {
-                /*product.SiteCard = entity;*/
-
                 dbContext.Entry(entity).State = EntityState.Added;
             }
             else
             {
-                dbContext.Entry(entity).State = EntityState.Modified;
+                /*dbContext.Entry(entity).State = EntityState.Modified;*/
             }
-            dbContext.SaveChanges();//Может не работать правильно async
+            dbContext.SaveChangesAsync();
         }
 
-        public ProductSiteCard CreateNewSiteCard(int id)
+        public ProductSiteCard CreateNewSiteCard(int id)// TODO Потенциальная оптимизация
         {
-            return new ProductSiteCard() { ProductId = id};
+            var cardsId = dbContext.ProductSiteCards.Select(e => e.ProductId).ToList();
+            var index = EmptyIndexSearch.Search(cardsId);
+            return index == -1 ? null : new ProductSiteCard() { ProductId = index};
         }
     }
 }

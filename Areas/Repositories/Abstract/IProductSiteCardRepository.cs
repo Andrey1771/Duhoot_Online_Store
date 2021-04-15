@@ -1,8 +1,4 @@
-﻿using OnlineShopDuhootWeb.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 
 namespace OnlineShopDuhootWeb.Areas.Repositories.Abstract

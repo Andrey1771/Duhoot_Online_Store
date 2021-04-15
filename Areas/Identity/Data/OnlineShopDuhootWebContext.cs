@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -23,16 +19,11 @@ namespace OnlineShopDuhootWeb.Data
             : base(options)
         {
 
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -212,10 +203,6 @@ namespace OnlineShopDuhootWeb.Data
                 ProductId = 5
             }
             };
-
-
-            /*product.SiteCards.Add(productSite);
-            producer.Products.Add(product);*/
 
             builder.Entity<Producer>().HasData(producers);
             builder.Entity<Product>().HasData(products);
