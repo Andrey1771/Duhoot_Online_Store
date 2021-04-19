@@ -4,7 +4,7 @@
     ViewBag.Title = strTitle;
 }
 
-<div>
+<div class="admin__container">
     <h2>@strTitle</h2>
 
     <p class="tableHeader">Производители</p>
@@ -17,8 +17,8 @@
             <div>Расположение</div>
             <div>Описание</div>
             <div>Продукты</div>
-            @{ string actionToProducer = ""; }
-            @foreach (var producer in Model)
+            <div>Редактировать?</div>
+            @foreach (Producer producer in Model)
             {
                 <div><input asp-for="@producer.ProducerId" value="@producer.ProducerId" /></div>
                 <div><input asp-for="@producer.Name" value="@producer.Name" /></div>
@@ -26,28 +26,31 @@
                 <div><input asp-for="@producer.Location" value="@producer.Location" /></div>
                 <div><input asp-for="@producer.Description" value="@producer.Description" /></div>
 
-                <div class="inlineElement">
-                    @if (producer.Products != null)
+                <div>
+                    @if (producer.Products == null || producer.Products.Count() == 0)
                     {
-                        <div>Есть </div>
-                        actionToProducer = "Редактировать";
+                        <div>Нет</div>
                     }
                     else
                     {
-                        <div>Нет </div>
-                        actionToProducer = "Добавить";
+                        <div>Есть</div>
                     }
-                    <a class="insertLink" asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="@producer.ProducerId">@actionToProducer</a>
                 </div>
+                <div><a class="insertLink" asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="@producer.ProducerId">Редактировать</a></div>
             }
         </div>
     </div>
     @if (Model.Any())
     {
-        <p>Удалить производителя</p>// TODO в будущем добавить js и возомжность удаления через выделение элементов
-        <form style="display: inline-block;" asp-area="Admin" id="DeleteProducerForm" asp-controller="ProducerEdit" asp-action="ProducerDelete" method="post">
-            <input name="producerId" type="number" value="1" min="1" max="@Model.Count()">
-            <a href="#" onclick="document.getElementById('DeleteProducerForm').submit();">Удалить</a>
+        <p>Удалить производителя по Id</p>// TODO в будущем добавить js и возоможность удаления через выделение элементов
+        <form style="display: inline-block;" asp-area="Admin" asp-controller="Producer" asp-action="ProducerDelete" method="post">
+            <select name="id">
+                @foreach (Producer producer in Model)
+                {
+                    <option value="@producer.ProducerId">@producer.ProducerId</option>
+                }
+            </select>
+            <input type="submit" value="Удалить" />
         </form>
     }
     <a asp-area="Admin" asp-controller="Producer" asp-action="ProducerEdit" asp-route-id="">Добавить продукт</a>

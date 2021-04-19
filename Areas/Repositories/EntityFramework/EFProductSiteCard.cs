@@ -20,7 +20,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
         public void DeleteSiteCard(int id)
         {
             dbContext.Remove(new ProductSiteCard() { ProductId = id });
-            dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
         public ProductSiteCard GetSiteCardById(int id)
@@ -30,22 +30,26 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveSiteCard(ProductSiteCard entity)
         {
-            if (dbContext.ProductSiteCards.FirstOrDefault(e => e.ProductId == entity.ProductId) == default)
+            if (dbContext.ProductSiteCards.AsNoTracking().FirstOrDefault(e => e.ProductId == entity.ProductId) == default)
             {
                 dbContext.Entry(entity).State = EntityState.Added;
             }
             else
             {
-                /*dbContext.Entry(entity).State = EntityState.Modified;*/
+                dbContext.Entry(entity).State = EntityState.Modified;
             }
-            dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
         public ProductSiteCard CreateNewSiteCard(int id)// TODO Потенциальная оптимизация
         {
-            var cardsId = dbContext.ProductSiteCards.Select(e => e.ProductId).ToList();
-            var index = EmptyIndexSearch.Search(cardsId);
-            return index == -1 ? null : new ProductSiteCard() { ProductId = index};
+            if(id == default)
+            {
+                var cardsId = dbContext.ProductSiteCards.Select(e => e.ProductId).ToList();
+                id = EmptyIndexSearch.Search(cardsId);
+            }
+            
+            return id == -1 ? null : new ProductSiteCard() { ProductId = id};
         }
     }
 }

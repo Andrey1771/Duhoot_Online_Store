@@ -56,9 +56,9 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProductDelete(int productId)
+        public IActionResult ProductDelete(int id)
         {
-            dataManager.ProductRep.DeleteProduct(productId);
+            dataManager.ProductRep.DeleteProduct(id);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
         }
     }

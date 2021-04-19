@@ -22,7 +22,7 @@
                             <a href="#" onclick="document.getElementById('form-@entity.ProductId').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="ProductCards" asp-action="Index" asp-route-id="@entity.ProductId">
+                        <a asp-area="Admin" asp-controller="ProductCards" asp-action="Index" asp-route-id="@entity.ProductId">
                             @($"{entity.Title}")
                         </a>
                     </div>

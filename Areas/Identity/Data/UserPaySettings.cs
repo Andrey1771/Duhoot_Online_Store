@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopDuhootWeb.Areas.Identity.Data
 {
-    public class UserPaySettings
+    public class UserPaySettings // Лишний класс
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserPaySettingsId { get; set; }

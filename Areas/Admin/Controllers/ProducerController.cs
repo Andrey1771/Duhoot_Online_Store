@@ -6,7 +6,7 @@ using OnlineShopDuhootWeb.Service;
 namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProducerController : Controller
+    public class ProducerController : Controller 
     {
         private readonly DataManager dataManager;
         private readonly IWebHostEnvironment webHostEnvironment;
@@ -45,9 +45,9 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProducerDelete(int producerId)
+        public IActionResult ProducerDelete(int id)
         {
-            dataManager.ProducerRep.DeleteProducer(producerId);
+            dataManager.ProducerRep.DeleteProducer(id);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
         }
     }

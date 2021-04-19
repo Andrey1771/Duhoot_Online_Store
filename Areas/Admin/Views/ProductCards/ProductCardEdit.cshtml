@@ -29,7 +29,9 @@
             </div>
             <div class="div-box">
                 <label asp-for="BackgroundImage"></label>
+                <input asp-for="BackgroundImage"/>
                 <input asp-for="BackgroundImage" type="file" name="formImageFile" id="formImageFile" />
+
                 <div>
                     <img class="img-block" src="@Model?.BackgroundImage" />
                 </div>
@@ -51,7 +53,15 @@
             </div>
             <div class="div-box">
                 <label asp-for="TypeCard"></label>
-                <input asp-for="TypeCard" />
+                <select asp-for="TypeCard">
+                    @{ var typeCards = Enum.GetValues(typeof(TypeCard)).GetEnumerator(); }
+                    @foreach (string nameCard in Enum.GetNames(typeof(TypeCard)))
+                    {
+                        typeCards.MoveNext();
+                        <option value="@typeCards.Current">@nameCard</option>
+                    }
+                </select>
+                @*<input asp-for="TypeCard" />*@
                 <span asp-validation-for="TypeCard"></span>
             </div>
             <input type="submit" value="Сохранить" />

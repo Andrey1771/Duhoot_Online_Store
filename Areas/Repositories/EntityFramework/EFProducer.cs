@@ -20,7 +20,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
         public void DeleteProducer(int id)
         {
             dbContext.Remove(new Producer() { ProducerId = id });
-            dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
         public Producer GetProducerById(int id)
@@ -30,7 +30,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
 
         public void SaveProducer(Producer entity)
         {
-            Producer producer = dbContext.Producers.FirstOrDefault(x => x == entity);
+            Producer producer = dbContext.Producers.AsNoTracking().FirstOrDefault(x => x == entity);
             if (producer == default)
             {
                 dbContext.Entry(entity).State = EntityState.Added;
@@ -39,7 +39,7 @@ namespace OnlineShopDuhootWeb.Areas.Repositories.EntityFramework
             {
                 dbContext.Entry(entity).State = EntityState.Modified;
             }
-            dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
         public Producer CreateNewProducer()

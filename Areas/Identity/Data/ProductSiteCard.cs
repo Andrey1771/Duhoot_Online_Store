@@ -9,7 +9,7 @@ namespace OnlineShopDuhootWeb.Areas.Identity.Data
         House, Human, Education, Music, Transport
     }
 
-    public class ProductSiteCard
+    public class ProductSiteCard 
     {
         public ProductSiteCard()
         {

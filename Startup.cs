@@ -36,7 +36,6 @@ namespace OnlineShopDuhootWeb
                 options.HttpsPort = 5001;
             });
 
-            // AddTransient, тк объекты легковесные
             services.AddTransient<IProductSiteCardRepository, EFProductSiteCard>();
             services.AddTransient<IProductRepository, EFProduct>();
             services.AddTransient<IProducerRepository, EFProducer>();
@@ -62,7 +61,7 @@ namespace OnlineShopDuhootWeb
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = "duhoot";//Разобраться получше
+                options.Cookie.Name = "duhoot";
                 options.Cookie.HttpOnly = true;
                 options.LoginPath = "/account/login";
                 options.AccessDeniedPath = "/account/accessdenied";

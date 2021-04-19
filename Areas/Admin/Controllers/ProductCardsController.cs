@@ -35,7 +35,7 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProductCardEdit(ProductSiteCard model, IFormFile formImageFile/*Добавить проверку на картинку*/)
+        public IActionResult ProductCardEdit(ProductSiteCard model, IFormFile formImageFile/* Добавить проверку на картинку*/)
         {
             if(ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
                 {
                     model.BackgroundImage = Path.Combine("images/cardBgs/", formImageFile.FileName);
                     using var stream = new FileStream(Path.Combine(webHostEnvironment.WebRootPath, "images/cardBgs/", formImageFile.FileName), FileMode.Create);
-                    formImageFile.CopyToAsync(stream);//Убрать Async
+                    formImageFile.CopyTo(stream);
                 }
                 dataManager.ProductSiteCardRep.SaveSiteCard(model);
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
