@@ -12,27 +12,31 @@ namespace OnlineShopDuhootWeb.Service.EmailService.SmtpEmailService
 {
     public class SmtpMessageSender : IMessageSender
     {
-        public void SendEmail(MailMessage mailMessage)
+        private const int port = 587;
+        public void SendEmail(string from, string to, string subject, string titleMessage, string htmlBody)
         {
-            using (SmtpClient smtp = new("smtp.gmail.com", 587))
+            try
             {
-                try
+                MailAddress fromMail = new(from, titleMessage);
+                MailAddress toMail = new(to);
+                MailMessage mailMessage = new(fromMail, toMail);
+                mailMessage.Subject = subject;
+                mailMessage.Body = htmlBody;
+                mailMessage.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new(SenderSettings.SmtpEmail, port))
                 {
                     string email = SenderSettings.Email;
                     string password = SenderSettings.Password;
                     smtp.Credentials = new NetworkCredential(email, password);
-                }
-                catch (FileNotFoundException)
-                {
-                    Console.WriteLine("Письмо не было отправлено на почту, тк файл LoginAndPassword.txt не был найден");
-                }
-                catch
-                {
-                    Console.WriteLine("Письмо не было отправлено на почту, тк возникла ошибка при считывании данных из LoginAndPassword.txt или из-за ошибки со стороны NetworkCredential");
-                }
 
-                smtp.EnableSsl = true;
-                smtp.Send(mailMessage);
+                    smtp.EnableSsl = true;
+                    smtp.Send(mailMessage);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Письмо не было отправлено на почту, Ошибка: {e.Message}");
             }
         }
     }

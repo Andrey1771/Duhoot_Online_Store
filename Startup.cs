@@ -15,6 +15,7 @@ using OnlineShopDuhootWeb.Areas.Identity.Data;
 using Microsoft.AspNetCore.Http;
 using OnlineShopDuhootWeb.Service.EmailService.Abstract;
 using OnlineShopDuhootWeb.Service.EmailService.SmtpEmailService;
+using OnlineShopDuhootWeb.Service.EmailService.MimeEmailService;
 
 namespace OnlineShopDuhootWeb
 {
@@ -42,8 +43,10 @@ namespace OnlineShopDuhootWeb
             services.AddTransient<IProducerRepository, EFProducer>();
             services.AddTransient<DataManager>();
 
-            services.AddTransient<IMessageSender, SmtpMessageSender>();
-            
+            //Тут можно установить способ отправки
+            /*services.AddTransient<IMessageSender, SmtpMessageSender>();*/
+            services.AddTransient<IMessageSender, MimeMessageSender>();
+
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("ShopDbConnection");
             // добавляем контекст UserContext в качестве сервиса в приложение

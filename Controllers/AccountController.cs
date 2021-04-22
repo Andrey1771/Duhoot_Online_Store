@@ -83,16 +83,11 @@ namespace OnlineShopDuhootWeb.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    MailAddress from = new("register@duhoot.com", "Web Registration");
-                    MailAddress to = new(user.Email);
-                    MailMessage m = new(from, to);
-                    m.Subject = "Email confirmation";
-                    m.Body = string.Format("Для завершения регистрации перейдите по ссылке:" +
-                                    "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
-                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, user.Email }, Request.Scheme));
-                    m.IsBodyHtml = true;
-
-                    messageSender.SendEmail(m);
+                    messageSender.SendEmail("register@duhoot.com", user.Email,
+                        "Email confirmation", "Web Registration", string.Format("Для завершения регистрации перейдите по ссылке:" +
+                        "<a href=\"{0}\" title=\"Подтвердить регистрацию\">{0}</a>",
+                        Url.Action("ConfirmEmail", "Account", new { Token = user.Id, user.Email }, Request.Scheme))
+                        );
 
                     return RedirectToAction("Confirm", "Account", new { user.Email });
                 }
@@ -107,7 +102,7 @@ namespace OnlineShopDuhootWeb.Controllers
         [AllowAnonymous]
         public string Confirm(string Email)
         {
-            return "На почтовый адрес " + Email + " Вам высланы дальнейшие" +
+            return "На почтовый адрес " + Email + " Вам высланы дальнейшие " +
                     "инструкции по завершению регистрации";
         }
 
