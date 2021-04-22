@@ -13,7 +13,8 @@ using OnlineShopDuhootWeb.Areas.Repositories.Abstract;
 using OnlineShopDuhootWeb.Areas.Repositories.EntityFramework;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using Microsoft.AspNetCore.Http;
-
+using OnlineShopDuhootWeb.Service.EmailService.Abstract;
+using OnlineShopDuhootWeb.Service.EmailService.SmtpEmailService;
 
 namespace OnlineShopDuhootWeb
 {
@@ -40,6 +41,8 @@ namespace OnlineShopDuhootWeb
             services.AddTransient<IProductRepository, EFProduct>();
             services.AddTransient<IProducerRepository, EFProducer>();
             services.AddTransient<DataManager>();
+
+            services.AddTransient<IMessageSender, SmtpMessageSender>();
             
             // получаем строку подключения из файла конфигурации
             string connection = Configuration.GetConnectionString("ShopDbConnection");

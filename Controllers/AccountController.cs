@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using OnlineShopDuhootWeb.Service.EmailService.Abstract;
 
 namespace OnlineShopDuhootWeb.Controllers
 {
@@ -16,11 +17,13 @@ namespace OnlineShopDuhootWeb.Controllers
     {
         private readonly UserManager<OnlineShopDuhootWebUser> userManager;
         private readonly SignInManager<OnlineShopDuhootWebUser> signInManager;
+        private readonly IMessageSender messageSender;
 
-        public AccountController(UserManager<OnlineShopDuhootWebUser> auserManager, SignInManager<OnlineShopDuhootWebUser> asigninManager)
+        public AccountController(UserManager<OnlineShopDuhootWebUser> auserManager, SignInManager<OnlineShopDuhootWebUser> asigninManager, IMessageSender amessageSender)
         {
             userManager = auserManager;
             signInManager = asigninManager;
+            messageSender = amessageSender;
         }
 
         [AllowAnonymous]
@@ -89,30 +92,7 @@ namespace OnlineShopDuhootWeb.Controllers
                         Url.Action("ConfirmEmail", "Account", new { Token = user.Id, user.Email }, Request.Scheme));
                     m.IsBodyHtml = true;
 
-                    using (SmtpClient smtp = new("smtp.gmail.com", 587))
-                    {
-                        try
-                        {
-                            // Файл должен содержать данные поля:
-                            // Email
-                            // Password
-                            using StreamReader reader = new(@"LoginAndPassword.txt");// TODO На настоящем сервере, этого не будет
-                            string email = reader.ReadLine();
-                            string password = reader.ReadLine();
-                            smtp.Credentials = new NetworkCredential(email, password);
-                        }
-                        catch(FileNotFoundException)
-                        {
-                            Console.WriteLine("Письмо не было отправлено на почту, тк файл LoginAndPassword.txt не был найден");
-                        }
-                        catch
-                        {
-                            Console.WriteLine("Письмо не было отправлено на почту, тк возникла ошабка при считывании данных из LoginAndPassword.txt или из-за ошибки со стороны NetworkCredential");
-                        }
-                        
-                        smtp.EnableSsl = true;
-                        smtp.Send(m);
-                    }
+                    messageSender.SendEmail(m);
 
                     return RedirectToAction("Confirm", "Account", new { user.Email });
                 }

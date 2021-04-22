@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopDuhootWeb.Areas.Identity.Data;
 using OnlineShopDuhootWeb.Service;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
 {
@@ -22,6 +24,18 @@ namespace OnlineShopDuhootWeb.Areas.Admin.Controllers
             return View(dataManager.ProducerRep.Producers);
         }
 
+        /*private IEnumerable<bool> GetContainProductList()
+        {
+            var products = dataManager.ProductRep.Products.ToList();
+            List<bool> containProductList = new();
+
+            foreach (var product in products)
+            {
+                containProductList.Add(product.Any(e => e));
+            }
+            return containProductList;
+        }
+*/
         public IActionResult ProducerEdit(int id)
         {
             var producer = dataManager.ProducerRep.GetProducerById(id);

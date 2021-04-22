@@ -1,11 +1,12 @@
 ﻿using OnlineShopDuhootWeb.Service.EmailService.Abstract;
 using System;
+using System.Net.Mail;
 
 namespace OnlineShopDuhootWeb.Service.EmailService.MimeEmailService
 {
-    public class MimeEmail : IEmail
+    public class MimeMessageSender : IMessageSender
     {
-        public void SendEmail()
+        public void SendEmail(MailMessage mailMessage)
         {
             throw new NotImplementedException();
         }
