@@ -1,5 +1,11 @@
 # Duhoot_Online_Store
 <p>This is a website made by layout. Contains a database on EF and has a login with registration on Identity. Still in development.</p>
+
+## Launch
+<p><strong>For registration to work correctly</strong>, you need to add to the project directory a text document (Name - LoginAndPassword.txt) with email(<strong>Google email with access for unsafe programs</strong>) and password (Each on a new line).</p>
+<p><strong>Example:</strong></p>
+<div>email@gmail.com</div>
+<p>myPassword</p>
 <div>
   
   ### Main Page:
